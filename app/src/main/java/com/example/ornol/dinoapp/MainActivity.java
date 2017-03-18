@@ -5,9 +5,9 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 
-public class MainActivity extends FragmentActivity implements BlankFragment.OnFragmentInteractionListener,SignupFragment.OnFragmentInteractionListener{
+public class MainActivity extends FragmentActivity implements LoginFragment.OnFragmentInteractionListener,SignupFragment.OnFragmentInteractionListener{
 
-    private static BlankFragment editNameDialogFragment = new BlankFragment();
+    private static LoginFragment editNameDialogFragment = new LoginFragment();
     private static SignupFragment SDialogFragment = new SignupFragment();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
