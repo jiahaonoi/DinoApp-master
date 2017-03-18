@@ -14,12 +14,12 @@ import android.widget.EditText;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Signup_Fragment.OnFragmentInteractionListener} interface
+ * {@link SignupFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Signup_Fragment#newInstance} factory method to
+ * Use the {@link SignupFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Signup_Fragment extends DialogFragment {
+public class SignupFragment extends DialogFragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -31,7 +31,7 @@ public class Signup_Fragment extends DialogFragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public Signup_Fragment() {
+    public SignupFragment() {
         // Required empty public constructor
     }
 
@@ -41,11 +41,11 @@ public class Signup_Fragment extends DialogFragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Signup_Fragment.
+     * @return A new instance of fragment SignupFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static Signup_Fragment newInstance(String param1, String param2) {
-        Signup_Fragment fragment = new Signup_Fragment();
+    public static SignupFragment newInstance(String param1, String param2) {
+        SignupFragment fragment = new SignupFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -69,7 +69,7 @@ public class Signup_Fragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        myFragmentView =inflater.inflate(R.layout.fragment_signup_, container, false);
+        myFragmentView =inflater.inflate(R.layout.fragment_signup, container, false);
         Edits[0]=(EditText) myFragmentView.findViewById(R.id.restaurantName);
         Edits[1]=(EditText) myFragmentView.findViewById(R.id.email);
         Edits[2]=(EditText) myFragmentView.findViewById(R.id.Password);

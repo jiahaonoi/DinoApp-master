@@ -1,19 +1,18 @@
 package com.example.ornol.dinoapp;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-/**
- * Created by jiaha on 2017/2/22.
- */
 
-public class Activity_sigh_up extends AppCompatActivity{
+public class SignUpActivity extends AppCompatActivity {
+
     public EditText[] Edits= new EditText[10];
     public int temp = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sight_up);
+        setContentView(R.layout.activity_sign_up);
         Edits[0]=(EditText) findViewById(R.id.restaurantName);
         Edits[1]=(EditText) findViewById(R.id.email);
         Edits[2]=(EditText) findViewById(R.id.Password);

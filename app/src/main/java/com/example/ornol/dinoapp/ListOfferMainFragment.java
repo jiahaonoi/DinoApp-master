@@ -1,8 +1,5 @@
 package com.example.ornol.dinoapp;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,15 +10,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SimpleAdapter;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link ListOfferMain.OnFragmentInteractionListener} interface
+ * {@link ListOfferMainFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link ListOfferMain#newInstance} factory method to
+ * Use the {@link ListOfferMainFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ListOfferMain extends ListFragment {
+public class ListOfferMainFragment extends ListFragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -33,7 +34,7 @@ public class ListOfferMain extends ListFragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public ListOfferMain() {
+    public ListOfferMainFragment() {
         // Required empty public constructor
     }
 
@@ -43,11 +44,11 @@ public class ListOfferMain extends ListFragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ListOfferMain.
+     * @return A new instance of fragment ListOfferMainFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ListOfferMain newInstance(String param1, String param2) {
-        ListOfferMain fragment = new ListOfferMain();
+    public static ListOfferMainFragment newInstance(String param1, String param2) {
+        ListOfferMainFragment fragment = new ListOfferMainFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

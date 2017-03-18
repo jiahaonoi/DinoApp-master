@@ -1,17 +1,14 @@
 package com.example.ornol.dinoapp;
 
-import android.app.FragmentManager;
-import android.content.Intent;
 import android.net.Uri;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
-import android.view.Menu;
 
-public class MainActivity extends FragmentActivity implements BlankFragment.OnFragmentInteractionListener,Signup_Fragment.OnFragmentInteractionListener{
+public class MainActivity extends FragmentActivity implements BlankFragment.OnFragmentInteractionListener,SignupFragment.OnFragmentInteractionListener{
 
     private static BlankFragment editNameDialogFragment = new BlankFragment();
-    private static Signup_Fragment SDialogFragment = new Signup_Fragment();
+    private static SignupFragment SDialogFragment = new SignupFragment();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,8 +18,6 @@ public class MainActivity extends FragmentActivity implements BlankFragment.OnFr
 
     }
     public void DisplayLogin(View view){
-        //Intent intent = new Intent (this, Activity_sigh_up.class);
-        //startActivity(intent);
         showLoginDialog();
     }
 
@@ -36,9 +31,5 @@ public class MainActivity extends FragmentActivity implements BlankFragment.OnFr
     }
     public void DisplaySignUp(View view){
         showSignupDialog();
-    }
-    public void DisplayMenus(View view){
-        //Intent intent = new Intent (this, Activity_sigh_up.class);
-        //startActivity(intent);
     }
 }
