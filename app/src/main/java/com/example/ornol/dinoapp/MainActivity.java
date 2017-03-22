@@ -9,6 +9,7 @@ import android.view.View;
 
 
 import com.example.ornol.dinoapp.http.ApiCall;
+import com.example.ornol.dinoapp.json.JsonJavaConverter;
 import com.example.ornol.dinoapp.searchParams.PriceRange;
 import com.example.ornol.dinoapp.searchParams.SearchParams;
 import com.example.ornol.dinoapp.searchParams.SortBy;
@@ -16,6 +17,7 @@ import com.example.ornol.dinoapp.searchParams.Type;
 import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.util.List;
 
 import okhttp3.OkHttpClient;
 
@@ -46,7 +48,6 @@ public class MainActivity extends FragmentActivity implements LoginFragment.OnFr
         android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
         editNameDialogFragment.show(fm, "fragment_edit_name");
 
-        loadOffers();
     }
     private void showSignupDialog() {
         android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
@@ -57,17 +58,18 @@ public class MainActivity extends FragmentActivity implements LoginFragment.OnFr
     }
 
 
-    // Loads Offers From Web Server
-    private void loadOffers() {
-        final String jsonString = "{\"ordering\":[{\"checked\":\"checked\",\"name\":\"Ascending\"},{\"checked\":\"\",\"name\":\"Descending\"}],\"priceRange\":{\"high\":10000,\"low\":0},\"searchBar\":\"\",\"sortBy\":[{\"checked\":\"\",\"name\":\"Price\"},{\"checked\":\"checked\",\"name\":\"Name\"},{\"checked\":\"\",\"name\":\"Restaurant\"},{\"checked\":\"\",\"name\":\"Type\"}],\"types\":[{\"active\":\"\",\"name\":\"Fast Food\"},{\"active\":\"\",\"name\":\"Fine Dining\"},{\"active\":\"\",\"name\":\"Bistro\"},{\"active\":\"\",\"name\":\"Vegan\"}]}";
-        final String url = "http://dino-web.herokuapp.com/api-offerlist";
-
+    // Loads Offers From Web Server based on jsonString representation of searchParams.
+    private void loadOffers(final String jsonString, final String url) {
+        Log.d("Here We ", "Are");
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params){
                 try {
                     String response = ApiCall.POST(client, url, jsonString);
                     Log.d("Response", response);
+                    JsonJavaConverter jsonJavaConverter = new JsonJavaConverter();
+                    List<Offer> offerList = jsonJavaConverter.jsonStringToListOfJavaObjects(response);
+                    Log.d("Offer List ", String.valueOf(offerList.get(0)));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
