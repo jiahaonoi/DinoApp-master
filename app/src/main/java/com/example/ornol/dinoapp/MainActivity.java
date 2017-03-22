@@ -5,6 +5,14 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 
+
+import com.example.ornol.dinoapp.searchParams.PriceRange;
+import com.example.ornol.dinoapp.searchParams.SearchParams;
+import com.example.ornol.dinoapp.searchParams.SortBy;
+import com.example.ornol.dinoapp.searchParams.Type;
+import com.google.gson.Gson;
+
+
 public class MainActivity extends FragmentActivity implements LoginFragment.OnFragmentInteractionListener,SignupFragment.OnFragmentInteractionListener{
 
     private static LoginFragment editNameDialogFragment = new LoginFragment();
