@@ -5,7 +5,7 @@ package com.example.ornol.dinoapp.searchParams;
  */
 
 public class SearchParams {
-    private String searchBar;
+    private String searchBar = "";
     private Type[] types;
     private PriceRange priceRange;
     // Some sortBy in "sortBy[]" needs to be checked.

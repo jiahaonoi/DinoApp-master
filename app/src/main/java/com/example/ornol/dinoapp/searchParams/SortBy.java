@@ -5,8 +5,8 @@ package com.example.ornol.dinoapp.searchParams;
  */
 
 public class SortBy {
-    private String name;
-    private String checked;
+    private String name = "";
+    private String checked = "";
 
     public SortBy(){};
 

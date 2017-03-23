@@ -5,8 +5,8 @@ package com.example.ornol.dinoapp.searchParams;
  */
 
 public class PriceRange {
-    private int low;
-    private int high;
+    private int low = 0;
+    private int high = 10000;
 
     public PriceRange() {}
 

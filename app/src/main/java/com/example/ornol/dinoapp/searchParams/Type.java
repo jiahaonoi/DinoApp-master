@@ -5,9 +5,9 @@ package com.example.ornol.dinoapp.searchParams;
  */
 
 public class Type {
-    private String name;
+    private String name = "";
     // If this type is active this string has the value "active"
-    private String active;
+    private String active = "";
 
     public Type(){};
 
