@@ -47,6 +47,7 @@ public class MainActivity extends FragmentActivity implements LoginFragment.OnFr
         android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
         editNameDialogFragment.show(fm, "fragment_edit_name");
 
+        // Test the method
         loadOffers(createDummySearchParams());
 
     }
