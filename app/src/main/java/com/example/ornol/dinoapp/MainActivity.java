@@ -14,7 +14,6 @@ import com.example.ornol.dinoapp.searchParams.PriceRange;
 import com.example.ornol.dinoapp.searchParams.SearchParams;
 import com.example.ornol.dinoapp.searchParams.SortBy;
 import com.example.ornol.dinoapp.searchParams.Type;
-import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.util.List;
@@ -48,6 +47,8 @@ public class MainActivity extends FragmentActivity implements LoginFragment.OnFr
         android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
         editNameDialogFragment.show(fm, "fragment_edit_name");
 
+        loadOffers(createDummySearchParams());
+
     }
     private void showSignupDialog() {
         android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
@@ -59,8 +60,10 @@ public class MainActivity extends FragmentActivity implements LoginFragment.OnFr
 
 
     // Loads Offers From Web Server based on jsonString representation of searchParams.
-    private void loadOffers(final String jsonString, final String url) {
-        Log.d("Here We ", "Are");
+    private void loadOffers(SearchParams searchParams) {
+        JsonJavaConverter jsonJavaConverter = new JsonJavaConverter();
+        final String jsonString = jsonJavaConverter.JavaObjectToJsonString(searchParams);
+        final String url = "http://dino-web.herokuapp.com/api-offerlist";
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params){
@@ -69,12 +72,90 @@ public class MainActivity extends FragmentActivity implements LoginFragment.OnFr
                     Log.d("Response", response);
                     JsonJavaConverter jsonJavaConverter = new JsonJavaConverter();
                     List<Offer> offerList = jsonJavaConverter.jsonStringToListOfJavaObjects(response);
-                    Log.d("Offer List ", String.valueOf(offerList.get(0)));
+                    Log.d("Offer List ", String.valueOf(offerList.get(1)));
                 } catch (IOException e) {
                     e.printStackTrace();
+                    // Handle errors..........
                 }
                 return null;
             }
         }.execute();
+    }
+
+    private static SearchParams createDummySearchParams() {
+        SearchParams searchParams = new SearchParams();
+
+        searchParams.setSearchBar("");
+
+        PriceRange priceRange = new PriceRange();
+        priceRange.setLow(0);
+        priceRange.setHigh(10000);
+        searchParams.setPriceRange(priceRange);
+
+        Type fastFood = new Type();
+        fastFood.setActive("");
+        fastFood.setName("Fast Food");
+
+        Type fineDining = new Type();
+        fineDining.setActive("");
+        fineDining.setName("Fine Dining");
+
+        Type bistro = new Type();
+        bistro.setActive("");
+        bistro.setName("Bistro");
+
+        Type vegan = new Type();
+        vegan.setActive("");
+        vegan.setName("Vegan");
+
+        Type types[] = new Type[4];
+        types[0] = fastFood;
+        types[1] = fineDining;
+        types[2] = bistro;
+        types[3] = vegan;
+
+        searchParams.setTypes(types);
+
+        SortBy price = new SortBy();
+        price.setChecked("");
+        price.setName("Price");
+
+        SortBy name = new SortBy();
+        name.setChecked("checked");
+        name.setName("Name");
+
+        SortBy restaurant = new SortBy();
+        restaurant.setChecked("");
+        restaurant.setName("Restaurant");
+
+        SortBy type = new SortBy();
+        type.setChecked("");
+        type.setName("Type");
+
+        SortBy sortBy[] = new SortBy[4];
+        sortBy[0] = price;
+        sortBy[1] = name;
+        sortBy[2] = restaurant;
+        sortBy[3] = type;
+
+        searchParams.setSortBy(sortBy);
+
+        SortBy ascending = new SortBy();
+        ascending.setChecked("checked");
+        ascending.setName("Ascending");
+
+        SortBy descending = new SortBy();
+        descending.setChecked("");
+        descending.setName("Descending");
+
+        SortBy ordering[] = new SortBy[2];
+        ordering[0] = ascending;
+        ordering[1] = descending;
+
+        searchParams.setOrdering(ordering);
+
+
+
+        return searchParams;
     }
 }
