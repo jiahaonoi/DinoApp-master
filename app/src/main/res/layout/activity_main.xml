@@ -6,32 +6,6 @@
     android:layout_height="fill_parent">
     <ListView
         android:id="@+id/list"
-        android:layout_height="match_parent"
         android:layout_width="match_parent"
-<<<<<<< HEAD
-=======
-        android:layout_height="wrap_content"
-        android:paddingTop="56dp"
-        android:paddingLeft="24dp"
-        android:paddingRight="24dp">
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:id="@+id/Login"
-            android:text="Log In"
-            android:onClick="DisplayLogin"
-            />
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:id="@+id/Sighup"
-            android:text="Sign Up"
-            android:onClick="DisplaySignUp"
->>>>>>> 62e5fdd51191301ff2da6b857ba50c1bebc9bf21
-        />
+        android:layout_height="wrap_content"/>
 </RelativeLayout>
