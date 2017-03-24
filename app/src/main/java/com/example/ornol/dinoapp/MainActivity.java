@@ -48,7 +48,7 @@ public class MainActivity extends FragmentActivity implements LoginFragment.OnFr
         editNameDialogFragment.show(fm, "fragment_edit_name");
 
         // Test the method
-        loadOffers(createDummySearchParams());
+        //loadOffers(createDummySearchParams());
 
     }
     private void showSignupDialog() {
