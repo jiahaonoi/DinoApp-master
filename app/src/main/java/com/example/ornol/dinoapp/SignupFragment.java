@@ -2,13 +2,25 @@ package com.example.ornol.dinoapp;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+
+import com.example.ornol.dinoapp.http.ApiCall;
+import com.example.ornol.dinoapp.json.JsonJavaConverter;
+import com.example.ornol.dinoapp.searchParams.SearchParams;
+import com.example.ornol.dinoapp.users.User;
+
+import java.io.IOException;
+import java.util.List;
+
+import okhttp3.OkHttpClient;
 
 
 /**
@@ -128,5 +140,33 @@ public class SignupFragment extends DialogFragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+
+    // Create user in our database through API POST request
+    private void createUser(User user){
+        final OkHttpClient client = new OkHttpClient();
+        JsonJavaConverter jsonJavaConverter = new JsonJavaConverter();
+        final String jsonString = jsonJavaConverter.JavaObjectToJsonString(user);
+        final String url = "http://dino-web.herokuapp.com/users/api-signup";
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params){
+                try {
+                    String response = ApiCall.POST(client, url, jsonString);
+                    Log.d("Response", response);
+                    // Handle Success.........
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    // Handle errors..........
+                }
+                return null;
+            }
+        }.execute();
+    }
+
+    private void testCreateUser(){
+        User user = new User("Test123456", "Test123456", "Test123456", 1233456, "Test123456", "Test123456", "Test123456", 333, "Test123456");
+        createUser(user);
     }
 }
