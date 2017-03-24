@@ -16,6 +16,8 @@ import com.example.ornol.dinoapp.http.ApiCall;
 import com.example.ornol.dinoapp.json.JsonJavaConverter;
 import com.example.ornol.dinoapp.searchParams.SearchParams;
 import com.example.ornol.dinoapp.users.User;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import java.io.IOException;
 import java.util.List;
@@ -70,6 +72,7 @@ public class SignupFragment extends DialogFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -155,10 +158,24 @@ public class SignupFragment extends DialogFragment {
                 try {
                     String response = ApiCall.POST(client, url, jsonString);
                     Log.d("Response", response);
-                    // Handle Success.........
+
+                    // response object looks like {success: true/false}
+                    // Extract the value of success to Java Boolean, so we can work with it.
+                    JsonObject jobj = new Gson().fromJson(response, JsonObject.class);
+                    Boolean result = jobj.get("success").getAsBoolean();
+
+                    // Check if signup was successful:
+                    if(result){
+                        // Handle Signup Success.........  TODO
+                        Log.d("Success: ", "WOHO!" );
+                    }else{
+                        // Handle Signup Failure......... TODO
+                        Log.d("Failure: ", ":((((");
+                    }
+
                 } catch (IOException e) {
                     e.printStackTrace();
-                    // Handle errors..........
+                    // Handle errors in API call......... TODO
                 }
                 return null;
             }
