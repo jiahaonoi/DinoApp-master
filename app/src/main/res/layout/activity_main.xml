@@ -19,7 +19,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:id="@+id/Login"
-            android:text="Log In"
+            android:text="Log Innnnnnn"
             android:onClick="DisplayLogin"
             />
         <Button
