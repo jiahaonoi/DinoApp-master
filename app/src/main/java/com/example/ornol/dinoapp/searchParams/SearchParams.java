@@ -5,14 +5,20 @@ package com.example.ornol.dinoapp.searchParams;
  */
 
 public class SearchParams {
-    private String searchBar = "";
+    private String searchBar;
     private Type[] types;
     private PriceRange priceRange;
-    // Some sortBy in "sortBy[]" needs to be checked.
+    // Some sortBy in "sortBy[]" needs to be checked for the API call to work.
     private SortBy[] sortBy;
     private SortBy[] ordering;
 
-    public SearchParams() {}
+    public SearchParams(String searchBar, Type[] types, PriceRange priceRange, SortBy[] sortBy, SortBy[] ordering) {
+        this.searchBar = searchBar;
+        this.types = types;
+        this.priceRange = priceRange;
+        this.sortBy = sortBy;
+        this.ordering = ordering;
+    }
 
     public String getSearchBar() {
         return searchBar;
