@@ -26,4 +26,8 @@ public class PriceRange {
     public void setHigh(int high) {
         this.high = high;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 62e5fdd51191301ff2da6b857ba50c1bebc9bf21
