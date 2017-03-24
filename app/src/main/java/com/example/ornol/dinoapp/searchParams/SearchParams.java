@@ -20,6 +20,8 @@ public class SearchParams {
         this.ordering = ordering;
     }
 
+    public SearchParams(){};
+
     public String getSearchBar() {
         return searchBar;
     }
