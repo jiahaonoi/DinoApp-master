@@ -48,7 +48,7 @@ public class MainActivity extends FragmentActivity implements LoginFragment.OnFr
         editNameDialogFragment.show(fm, "fragment_edit_name");
 
         // Test the method
-        //loadOffers(createDummySearchParams());
+//        loadOffers(createDummySearchParams());
 
     }
     private void showSignupDialog() {
@@ -72,8 +72,21 @@ public class MainActivity extends FragmentActivity implements LoginFragment.OnFr
                     String response = ApiCall.POST(client, url, jsonString);
                     Log.d("Response", response);
                     JsonJavaConverter jsonJavaConverter = new JsonJavaConverter();
-                    List<Offer> offerList = jsonJavaConverter.jsonStringToListOfJavaObjects(response);
-                    Log.d("Offer List ", String.valueOf(offerList.get(1)));
+
+                    // Try to turn our response to List of offers
+                    try {
+                        // Response on right format, carry on.
+                        List<Offer> offerList = jsonJavaConverter.jsonStringToListOfJavaObjects(response);
+
+                        // Success handling .... TODO
+                        Log.d("Success: ", "WOHO!");
+
+                    }catch (Exception e) {
+                        // Error in response
+                        // Error handling ..... TODO
+                        Log.d("Failure: ", ":((((");
+                    }
+
                 } catch (IOException e) {
                     e.printStackTrace();
                     // Handle errors..........
