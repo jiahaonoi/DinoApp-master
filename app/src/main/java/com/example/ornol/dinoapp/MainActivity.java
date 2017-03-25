@@ -190,4 +190,85 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
             }
         }.execute();
     }
+
+
+
+    // INIT SEARCH PARAMS
+    // SHOULD BE IN A CLASS ON ITS OWN TODO
+    private static SearchParams initSearchParams() {
+        SearchParams searchParams = new SearchParams();
+
+        searchParams.setSearchBar("");
+
+        PriceRange priceRange = new PriceRange();
+        priceRange.setLow(0);
+        priceRange.setHigh(10000);
+        searchParams.setPriceRange(priceRange);
+
+        Type fastFood = new Type();
+        fastFood.setActive("");
+        fastFood.setName("Fast Food");
+
+        Type fineDining = new Type();
+        fineDining.setActive("");
+        fineDining.setName("Fine Dining");
+
+        Type bistro = new Type();
+        bistro.setActive("");
+        bistro.setName("Bistro");
+
+        Type vegan = new Type();
+        vegan.setActive("");
+        vegan.setName("Vegan");
+
+        Type types[] = new Type[4];
+        types[0] = fastFood;
+        types[1] = fineDining;
+        types[2] = bistro;
+        types[3] = vegan;
+
+        searchParams.setTypes(types);
+
+        SortBy price = new SortBy();
+        price.setChecked("");
+        price.setName("Price");
+
+        SortBy name = new SortBy();
+        name.setChecked("checked");
+        name.setName("Name");
+
+        SortBy restaurant = new SortBy();
+        restaurant.setChecked("");
+        restaurant.setName("Restaurant");
+
+        SortBy type = new SortBy();
+        type.setChecked("");
+        type.setName("Type");
+
+        SortBy sortBy[] = new SortBy[4];
+        sortBy[0] = price;
+        sortBy[1] = name;
+        sortBy[2] = restaurant;
+        sortBy[3] = type;
+
+        searchParams.setSortBy(sortBy);
+
+        SortBy ascending = new SortBy();
+        ascending.setChecked("checked");
+        ascending.setName("Ascending");
+
+        SortBy descending = new SortBy();
+        descending.setChecked("");
+        descending.setName("Descending");
+
+        SortBy ordering[] = new SortBy[2];
+        ordering[0] = ascending;
+        ordering[1] = descending;
+
+        searchParams.setOrdering(ordering);
+
+
+
+        return searchParams;
+    }
 }
