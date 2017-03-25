@@ -1,11 +1,8 @@
 package com.example.ornol.dinoapp;
 
-import android.media.Image;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -18,7 +15,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -30,16 +26,11 @@ import com.example.ornol.dinoapp.searchParams.PriceRange;
 import com.example.ornol.dinoapp.searchParams.SearchParams;
 import com.example.ornol.dinoapp.searchParams.SortBy;
 import com.example.ornol.dinoapp.searchParams.Type;
-//import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
 
 import okhttp3.OkHttpClient;
-
-//import okhttp3.OkHttpClient;
-
 
 public class MainActivity extends AppCompatActivity implements LoginFragment.OnFragmentInteractionListener,SignupFragment.OnFragmentInteractionListener{
 
@@ -54,12 +45,13 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        populateMyList();
-        populateListView();
         ClickCallback();
+
         // Initialize the OkHttpClient
         client = new OkHttpClient();
+        loadOffers(initSearchParams());
     }
+
     public void onFragmentInteraction(Uri uri){
 
     }
@@ -101,11 +93,13 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
 
     //-----------------------------------------ListView-----------------------------
     //set data on myList.
-    public void populateMyList(){
-        myList.add(new Object[]{"Humberger Menu1",1400,"With vegetable, fries and coke"});
-        myList.add(new Object[]{"Humberger Menu2",1600,"With bacon, vegetable, fries and coke"});
-        myList.add(new Object[]{"Humberger Menu3",1800,"With bacon, egg, vegetable, fries and coke"});
-        myList.add(new Object[]{"Humberger Menu4",2000,"With extra humberger, bacon, egg, vegetable, fries and coke"});
+    public void populateMyList(List<Offer> offerList){
+        Log.d("Before loop", offerList.get(0).getName());
+        for(int i = 0; i < offerList.size(); i++){
+            myList.add(new Object[]{offerList.get(i).getName(),offerList.get(i).getPrice(), offerList.get(i).getDescription()});
+        }
+//        myList.add(new Object[]{"Humberger Menu1",1400,"With vegetable, fries and coke"});
+
     }
 
     public void populateListView(){
@@ -171,15 +165,20 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
                     // Try to turn our response to List of offers
                     try {
                         // Response on right format, carry on.
-                        List<Offer> offerList = jsonJavaConverter.jsonStringToListOfJavaObjects(response);
-
-                        // Success handling .... TODO
-                        Log.d("Success: ", "WOHO!");
-
+                        List<Offer> offerList = jsonJavaConverter.jsonStringToListOfOffers(response);
+                        populateMyList(offerList);
+                        // Can't change the view unless we are on the UI Thread
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                populateListView();
+                            }
+                        });
                     }catch (Exception e) {
                         // Error in response
                         // Error handling ..... TODO
-                        Log.d("Failure: ", ":((((");
+                        e.printStackTrace();
+//                        Log.d("Failure: ", e.toString());
                     }
 
                 } catch (IOException e) {

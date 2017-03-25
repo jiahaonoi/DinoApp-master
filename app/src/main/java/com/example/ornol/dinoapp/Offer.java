@@ -1,5 +1,7 @@
 package com.example.ornol.dinoapp;
 
+import android.util.Log;
+
 import java.util.Date;
 
 /**
@@ -52,6 +54,7 @@ public class Offer {
     }
 
     public String getName() {
+        System.out.println("Here we are!");
         return name;
     }
 

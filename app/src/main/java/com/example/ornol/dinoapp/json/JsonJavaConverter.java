@@ -2,6 +2,7 @@ package com.example.ornol.dinoapp.json;
 
 import android.util.Log;
 
+import com.example.ornol.dinoapp.Offer;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -22,6 +23,12 @@ public class JsonJavaConverter {
     public <T> List<T> jsonStringToListOfJavaObjects(String jsonString){
         Gson gson = new Gson();
         List<T> returnList = gson.fromJson(jsonString, new TypeToken<List<T>>(){}.getType());
+        return returnList;
+    }
+
+    public List<Offer> jsonStringToListOfOffers(String jsonString){
+        Gson gson = new Gson();
+        List<Offer> returnList = gson.fromJson(jsonString, new TypeToken<List<Offer>>(){}.getType());
         return returnList;
     }
 
