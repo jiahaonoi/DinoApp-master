@@ -153,11 +153,11 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
             }
         });
     }
-    //-----------------------------------------ListView-----------------------------
-
     // Loads Offers From Web Server based on jsonString representation of searchParams.
-   /* private void loadOffers(final String jsonString, final String url) {
-        Log.d("Here We ", "Are");
+    private void loadOffers(SearchParams searchParams) {
+        JsonJavaConverter jsonJavaConverter = new JsonJavaConverter();
+        final String jsonString = jsonJavaConverter.JavaObjectToJsonString(searchParams);
+        final String url = "http://dino-web.herokuapp.com/api-offerlist";
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params){
@@ -165,13 +165,27 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
                     String response = ApiCall.POST(client, url, jsonString);
                     Log.d("Response", response);
                     JsonJavaConverter jsonJavaConverter = new JsonJavaConverter();
-                    List<Offer> offerList = jsonJavaConverter.jsonStringToListOfJavaObjects(response);
-                    Log.d("Offer List ", String.valueOf(offerList.get(0)));
+
+                    // Try to turn our response to List of offers
+                    try {
+                        // Response on right format, carry on.
+                        List<Offer> offerList = jsonJavaConverter.jsonStringToListOfJavaObjects(response);
+
+                        // Success handling .... TODO
+                        Log.d("Success: ", "WOHO!");
+
+                    }catch (Exception e) {
+                        // Error in response
+                        // Error handling ..... TODO
+                        Log.d("Failure: ", ":((((");
+                    }
+
                 } catch (IOException e) {
                     e.printStackTrace();
+                    // Handle errors..........
                 }
                 return null;
             }
         }.execute();
-    }*/
+    }
 }
