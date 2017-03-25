@@ -36,13 +36,15 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
+import okhttp3.OkHttpClient;
+
 //import okhttp3.OkHttpClient;
 
 
 public class MainActivity extends AppCompatActivity implements LoginFragment.OnFragmentInteractionListener,SignupFragment.OnFragmentInteractionListener{
 
     // OkHttpClient for API Calls
-   // private OkHttpClient client;
+     private OkHttpClient client;
 
     private static LoginFragment editNameDialogFragment = new LoginFragment();
     private static SignupFragment SDialogFragment = new SignupFragment();
@@ -56,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
         populateListView();
         ClickCallback();
         // Initialize the OkHttpClient
-        //client = new OkHttpClient();
+        client = new OkHttpClient();
     }
     public void onFragmentInteraction(Uri uri){
 
