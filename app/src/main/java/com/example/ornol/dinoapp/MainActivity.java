@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,7 +40,8 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
 
     private static LoginFragment editNameDialogFragment = new LoginFragment();
     private static SignupFragment SDialogFragment = new SignupFragment();
-    private List<Object> myList = new ArrayList<Object>();
+    private List<Offer> myList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,22 +96,25 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
     //-----------------------------------------ListView-----------------------------
     //set data on myList.
     public void populateMyList(List<Offer> offerList){
-        Log.d("Before loop", offerList.get(0).getName());
         for(int i = 0; i < offerList.size(); i++){
-            myList.add(new Object[]{offerList.get(i).getName(),offerList.get(i).getPrice(), offerList.get(i).getDescription()});
+//            myList.add(new Object[]{offerList.get(i).getName(),offerList.get(i).getPrice(), offerList.get(i).getDescription()});
+//            myList.add(offerList.get(i));
         }
+
+        myList = offerList;
+//        myList = offerList;
 //        myList.add(new Object[]{"Humberger Menu1",1400,"With vegetable, fries and coke"});
 
     }
 
     public void populateListView(){
-        ArrayAdapter<Object> adapter = new MyListAdapter();
+        MyListAdapter adapter = new MyListAdapter();
         ListView list = (ListView) findViewById(R.id.list);
         list.setAdapter(adapter);
     }
 
     //Adapter for ListView
-    private class MyListAdapter extends ArrayAdapter<Object>{
+    private class MyListAdapter extends ArrayAdapter<Offer> {
         public MyListAdapter(){
             super(MainActivity.this,R.layout.activity_main, myList);
         }
@@ -119,21 +124,22 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
             if (itemView == null) {
                 itemView = getLayoutInflater().inflate(R.layout.item_view, parent, false);
             }
-            Object[] currentItem = (Object[]) myList.get(position);
+            Offer currentItem = myList.get(position);
             ImageView imageView = (ImageView) itemView.findViewById(R.id.image);
             imageView.setImageResource(R.drawable.humberger);
 
             TextView name = (TextView) itemView.findViewById(R.id.name);
-            name.setText("Name:" + currentItem[0]);
+            name.setText("Name:" + currentItem.getName());
 
             TextView price = (TextView) itemView.findViewById(R.id.price);
-            price.setText("Price:" + (int) currentItem[1]);
+            price.setText("Price:" + currentItem.getPrice());
 
             TextView description = (TextView) itemView.findViewById(R.id.description);
-            description.setText("Description:" + currentItem[2]);
+            description.setText("Description:" + currentItem.getDescription());
             return itemView;
         }
     }
+
     //set onItemClick for ListView.
     private void ClickCallback(){
         final ListView list = (ListView)findViewById(R.id.list);
