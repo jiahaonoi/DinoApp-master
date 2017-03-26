@@ -1,23 +1,29 @@
 package com.example.ornol.dinoapp;
 
+import android.app.DialogFragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app. DialogFragment;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import java.math.*;
+
+import java.util.Date;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link LoginFragment.OnFragmentInteractionListener} interface
+ * {@link OfferProfileDialogFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link LoginFragment#newInstance} factory method to
+ * Use the {@link OfferProfileDialogFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class LoginFragment extends DialogFragment {
+public class OfferProfileDialogFragment extends android.support.v4.app.DialogFragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -29,7 +35,10 @@ public class LoginFragment extends DialogFragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public LoginFragment() {
+    private Offer offer;
+    private View myFragmentView;
+
+    public OfferProfileDialogFragment() {
         // Required empty public constructor
     }
 
@@ -39,11 +48,11 @@ public class LoginFragment extends DialogFragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment LoginFragment.
+     * @return A new instance of fragment OfferProfileDialogFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static LoginFragment newInstance(String param1, String param2) {
-        LoginFragment fragment = new LoginFragment();
+    public static OfferProfileDialogFragment newInstance(String param1, String param2) {
+        OfferProfileDialogFragment fragment = new OfferProfileDialogFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -58,16 +67,46 @@ public class LoginFragment extends DialogFragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        //getDialog().getWindow().setLayout(600,800);
     }
-
+    int width = 0;
+    int height = 0;
+    public void setSize(int width, int height){
+        this.width = width;
+        this.height = height;
+    }
+    @Override
+    public void onResume(){
+        getDialog().getWindow().setLayout(width,height);
+        super.onResume();
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_login, container, false);
-        getDialog().setTitle("Login");
-        return view;
+        populateOffer();
+        myFragmentView =inflater.inflate(R.layout.offer_profile_view, container, false);
+
+        ImageView image = (ImageView) myFragmentView.findViewById(R.id.image);
+        TextView name = (TextView) myFragmentView.findViewById(R.id.name);
+        TextView restauranName = (TextView) myFragmentView.findViewById(R.id.restaurantName);
+        TextView price = (TextView) myFragmentView.findViewById(R.id.price);
+        TextView type = (TextView) myFragmentView.findViewById(R.id.type);
+        TextView description = (TextView) myFragmentView.findViewById(R.id.Description);
+
+        image.setImageResource(R.drawable.humberger);
+        name.setText(""+offer.getName());
+        restauranName.setText(""+offer.getRestName());
+        price.setText(""+offer.getPrice());
+        type.setText(""+offer.getType());
+        description.setText(""+offer.getDescription());
+
+        return myFragmentView;
     }
 
+    public void populateOffer(){
+        offer = new Offer(123, "humberger", "Fast Food", 1200, new Date(), "testing description", new Date(),
+                "humberger.jpg", 123,"Dino", "20,Mars,2017","20,Mars,2018", new int[]{0,1,1,1,0,0,0});
+    }
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
@@ -105,16 +144,5 @@ public class LoginFragment extends DialogFragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
-    }
-    public void setSize(int width, int height) {
-        this.width = width;
-        this.height = height*5/10;
-    }
-    int width = 0;
-    int height = 0;
-    @Override
-    public void onResume(){
-        getDialog().getWindow().setLayout(width,height);
-        super.onResume();
     }
 }

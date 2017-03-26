@@ -184,6 +184,17 @@ public class SignupFragment extends DialogFragment {
 
     private void testCreateUser(){
         User user = new User("Test123456", "Test123456", "Test123456", 1233456, "Test123456", "Test123456", "Test123456", 333, "Test123456");
-        createUser(user);
+        //createUser(user);
+    }
+    public void setSize(int width, int height) {
+        this.width = width;
+        this.height = height;
+    }
+    int width = 0;
+    int height = 0;
+    @Override
+    public void onResume(){
+        getDialog().getWindow().setLayout(width,height);
+        super.onResume();
     }
 }

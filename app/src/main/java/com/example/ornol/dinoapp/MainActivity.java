@@ -1,9 +1,12 @@
 package com.example.ornol.dinoapp;
 
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
@@ -33,11 +36,11 @@ import java.util.List;
 
 import okhttp3.OkHttpClient;
 
-public class MainActivity extends AppCompatActivity implements LoginFragment.OnFragmentInteractionListener,SignupFragment.OnFragmentInteractionListener{
+public class MainActivity extends AppCompatActivity implements LoginFragment.OnFragmentInteractionListener,SignupFragment.OnFragmentInteractionListener,OfferProfileDialogFragment.OnFragmentInteractionListener{
 
     // OkHttpClient for API Calls
      private OkHttpClient client;
-
+    private static OfferProfileDialogFragment OfferDialogFragment = new OfferProfileDialogFragment();
     private static LoginFragment editNameDialogFragment = new LoginFragment();
     private static SignupFragment SDialogFragment = new SignupFragment();
     private List<Offer> myList = new ArrayList<>();
@@ -52,21 +55,44 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
         // Initialize the OkHttpClient
         client = new OkHttpClient();
         loadOffers(initSearchParams());
+        setScreenSize();
     }
 
     public void onFragmentInteraction(Uri uri){
 
     }
-
+    public void setScreenSize(){
+        //Get screen size.
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        this.height = displayMetrics.heightPixels* 9/10;
+        this.width = displayMetrics.widthPixels*9/10;
+    }
+    int height = 0;
+    int width = 0;
     private void showLoginDialog() {
         android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
+        Log.d("MyApp",height+","+width);
+        //Set screen size to DialogFragment
+        editNameDialogFragment.setSize(width, height);
         editNameDialogFragment.show(fm, "fragment_edit_name");
     }
 
     private void showSignupDialog() {
         android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
+        Log.d("MyApp",height+","+width);
+        //Set screen size to DialogFragment
+        SDialogFragment.setSize(width, height);
         SDialogFragment.show(fm, "fragment_edit_name");
     }
+    private void showOfferProfileDialog(){
+        android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
+        Log.d("MyApp",height+","+width);
+        //Set screen size to DialogFragment
+        OfferDialogFragment.setSize(width, height);
+        OfferDialogFragment.show(fm,"fragment_name");
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -150,8 +176,9 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
 
                 // Show Alert
                 Toast.makeText(getApplicationContext(),
-                        "Position :"+itemPosition, Toast.LENGTH_LONG)
+                        "Position :", Toast.LENGTH_LONG)
                         .show();
+                showOfferProfileDialog();
             }
         });
     }

@@ -13,7 +13,6 @@ import java.util.List;
  */
 
 public class JsonJavaConverter {
-
     public <T> T jsonStringToJavaObject(String jsonString, Class<T> objectParameterClass) {
         Gson gson = new Gson();
         return gson.fromJson(jsonString, objectParameterClass);
