@@ -92,8 +92,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:id="@+id/Signup"
+        android:id="@+id/signup"
         android:text="Sign Up"
-        android:onClick="SignUp"
         />
 </LinearLayout>

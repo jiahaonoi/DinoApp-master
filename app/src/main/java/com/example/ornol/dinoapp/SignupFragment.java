@@ -10,19 +10,20 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.ornol.dinoapp.http.ApiCall;
 import com.example.ornol.dinoapp.json.JsonJavaConverter;
-import com.example.ornol.dinoapp.searchParams.SearchParams;
 import com.example.ornol.dinoapp.users.User;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import java.io.IOException;
-import java.util.List;
 
 import okhttp3.OkHttpClient;
+
+import static com.example.ornol.dinoapp.R.id.restaurantName;
 
 
 /**
@@ -33,7 +34,7 @@ import okhttp3.OkHttpClient;
  * Use the {@link SignupFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SignupFragment extends DialogFragment {
+public class SignupFragment extends DialogFragment implements View.OnClickListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -67,7 +68,7 @@ public class SignupFragment extends DialogFragment {
         return fragment;
     }
 
-    public EditText[] Edits= new EditText[10];
+    public EditText[] edits = new EditText[10];
     public int temp = 0;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -83,23 +84,30 @@ public class SignupFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         myFragmentView =inflater.inflate(R.layout.fragment_signup, container, false);
-        Edits[0]=(EditText) myFragmentView.findViewById(R.id.restaurantName);
-        Edits[1]=(EditText) myFragmentView.findViewById(R.id.email);
-        Edits[2]=(EditText) myFragmentView.findViewById(R.id.Password);
-        Edits[3]=(EditText) myFragmentView.findViewById(R.id.PasswordConfirmation);
-        Edits[4]=(EditText) myFragmentView.findViewById(R.id.PhoneNumber);
-        Edits[5]=(EditText) myFragmentView.findViewById(R.id.Website);
-        Edits[6]=(EditText) myFragmentView.findViewById(R.id.Address);
-        Edits[7]=(EditText) myFragmentView.findViewById(R.id.City);
-        Edits[8]=(EditText) myFragmentView.findViewById(R.id.PostalCode);
-        Edits[9]=(EditText) myFragmentView.findViewById(R.id.Description);
-        for(int i = 0;i <Edits.length;i++) {
-            Edits[i].setOnClickListener(new View.OnClickListener() {
+
+        // Hook up the button
+        Button signupButton = (Button)myFragmentView.findViewById(R.id.signup);
+        signupButton.setOnClickListener(this);
+
+
+        edits[0]=(EditText) myFragmentView.findViewById(restaurantName);
+        edits[1]=(EditText) myFragmentView.findViewById(R.id.email);
+        edits[2]=(EditText) myFragmentView.findViewById(R.id.Password);
+        edits[3]=(EditText) myFragmentView.findViewById(R.id.PasswordConfirmation);
+        edits[4]=(EditText) myFragmentView.findViewById(R.id.PhoneNumber);
+        edits[5]=(EditText) myFragmentView.findViewById(R.id.Website);
+        edits[6]=(EditText) myFragmentView.findViewById(R.id.Address);
+        edits[7]=(EditText) myFragmentView.findViewById(R.id.City);
+        edits[8]=(EditText) myFragmentView.findViewById(R.id.PostalCode);
+        edits[9]=(EditText) myFragmentView.findViewById(R.id.Description);
+        for(int i = 0; i < edits.length; i++) {
+            edits[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Edits[temp].setText("");
+                    edits[temp].setText("");
                 }
             });
         }
@@ -130,6 +138,33 @@ public class SignupFragment extends DialogFragment {
         mListener = null;
     }
 
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.signup:
+                // TODO: Validation
+                User user = userFromInputFields();
+                createUser(user);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private User userFromInputFields(){
+        User user =
+                new User(
+                        edits[0].getText().toString(),
+                        edits[1].getText().toString(),
+                        edits[2].getText().toString(),
+                        Integer.parseInt(edits[4].getText().toString()),
+                        edits[5].getText().toString(),
+                        edits[6].getText().toString(),
+                        edits[7].getText().toString(),
+                        Integer.parseInt(edits[8].getText().toString()),
+                        edits[9].getText().toString());
+        return user;
+    }
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -166,10 +201,10 @@ public class SignupFragment extends DialogFragment {
 
                     // Check if signup was successful:
                     if(result){
-                        // Handle Signup Success.........  TODO
+                        // Handle Signup Success.........  TODO: Success message, close fragment
                         Log.d("Success: ", "WOHO!" );
                     }else{
-                        // Handle Signup Failure......... TODO
+                        // Handle Signup Failure......... TODO: Failure message, stay on fragment
                         Log.d("Failure: ", ":((((");
                     }
 
@@ -182,19 +217,21 @@ public class SignupFragment extends DialogFragment {
         }.execute();
     }
 
-    private void testCreateUser(){
-        User user = new User("Test123456", "Test123456", "Test123456", 1233456, "Test123456", "Test123456", "Test123456", 333, "Test123456");
-        //createUser(user);
-    }
     public void setSize(int width, int height) {
         this.width = width;
         this.height = height;
     }
+
+
+
     int width = 0;
     int height = 0;
     @Override
     public void onResume(){
-        getDialog().getWindow().setLayout(width,height);
+        getDialog().getWindow().setLayout(width, height + 200);
         super.onResume();
     }
+
+
+
 }
