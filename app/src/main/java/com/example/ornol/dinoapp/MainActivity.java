@@ -20,13 +20,9 @@ import android.widget.Toast;
 
 import com.example.ornol.dinoapp.http.ApiCall;
 import com.example.ornol.dinoapp.json.JsonJavaConverter;
-import com.example.ornol.dinoapp.searchParams.PriceRange;
 import com.example.ornol.dinoapp.searchParams.SearchParams;
-import com.example.ornol.dinoapp.searchParams.SortBy;
-import com.example.ornol.dinoapp.searchParams.Type;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.OkHttpClient;
@@ -34,12 +30,12 @@ import okhttp3.OkHttpClient;
 public class MainActivity extends AppCompatActivity implements LoginFragment.OnFragmentInteractionListener,SignupFragment.OnFragmentInteractionListener,OfferProfileDialogFragment.OnFragmentInteractionListener,SearchDialogFragment.OnFragmentInteractionListener{
 
     // OkHttpClient for API Calls
-     private OkHttpClient client;
+    private OkHttpClient client;
     private static OfferProfileDialogFragment OfferDialogFragment = new OfferProfileDialogFragment();
     private static LoginFragment editNameDialogFragment = new LoginFragment();
     private static SignupFragment SDialogFragment = new SignupFragment();
     private static SearchDialogFragment searchDialog = new SearchDialogFragment();
-    private List<Offer> myList = new ArrayList<>();
+    private OfferList theOfferList = OfferList.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
 
         // Initialize the OkHttpClient
         client = new OkHttpClient();
-        loadOffers(initSearchParams());
+        loadOffers(theOfferList.getSearchParams());
         setScreenSize();
     }
 
@@ -88,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
         OfferDialogFragment.setSize(width, height);
         OfferDialogFragment.show(fm,"fragment_name");
     }
+
     private void showSearchDialog(){
         android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
         Log.d("MyApp",height+","+width);
@@ -123,18 +120,6 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
     }
 
     //-----------------------------------------ListView-----------------------------
-    //set data on myList.
-    public void populateMyList(List<Offer> offerList){
-        for(int i = 0; i < offerList.size(); i++){
-//            myList.add(new Object[]{offerList.get(i).getName(),offerList.get(i).getPrice(), offerList.get(i).getDescription()});
-//            myList.add(offerList.get(i));
-        }
-
-        myList = offerList;
-//        myList = offerList;
-//        myList.add(new Object[]{"Humberger Menu1",1400,"With vegetable, fries and coke"});
-
-    }
 
     public void populateListView(){
         MyListAdapter adapter = new MyListAdapter();
@@ -144,8 +129,8 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
 
     //Adapter for ListView
     private class MyListAdapter extends ArrayAdapter<Offer> {
-        public MyListAdapter(){
-            super(MainActivity.this,R.layout.activity_main, myList);
+        MyListAdapter(){
+            super(MainActivity.this,R.layout.activity_main, theOfferList.getOffers());
         }
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
@@ -153,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
             if (itemView == null) {
                 itemView = getLayoutInflater().inflate(R.layout.item_view, parent, false);
             }
-            Offer currentItem = myList.get(position);
+            Offer currentItem = theOfferList.getOffers().get(position);
             ImageView imageView = (ImageView) itemView.findViewById(R.id.image);
             imageView.setImageResource(R.drawable.humberger);
 
@@ -185,6 +170,9 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
             }
         });
     }
+    private void loadOffers() {
+
+    }
     // Loads Offers From Web Server based on jsonString representation of searchParams.
     private void loadOffers(SearchParams searchParams) {
         JsonJavaConverter jsonJavaConverter = new JsonJavaConverter();
@@ -202,7 +190,8 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
                     try {
                         // Response on right format, carry on.
                         List<Offer> offerList = jsonJavaConverter.jsonStringToListOfOffers(response);
-                        populateMyList(offerList);
+                        theOfferList.setOffers(offerList);
+                        //populateMyList(offerList);
                         // Can't change the view unless we are on the UI Thread
                         runOnUiThread(new Runnable() {
                             @Override
@@ -228,82 +217,4 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
 
 
 
-    // INIT SEARCH PARAMS
-    // SHOULD BE IN A CLASS ON ITS OWN TODO
-    private static SearchParams initSearchParams() {
-        SearchParams searchParams = new SearchParams();
-
-        searchParams.setSearchBar("");
-
-        PriceRange priceRange = new PriceRange();
-        priceRange.setLow(0);
-        priceRange.setHigh(10000);
-        searchParams.setPriceRange(priceRange);
-
-        Type fastFood = new Type();
-        fastFood.setActive("");
-        fastFood.setName("Fast Food");
-
-        Type fineDining = new Type();
-        fineDining.setActive("");
-        fineDining.setName("Fine Dining");
-
-        Type bistro = new Type();
-        bistro.setActive("");
-        bistro.setName("Bistro");
-
-        Type vegan = new Type();
-        vegan.setActive("");
-        vegan.setName("Vegan");
-
-        Type types[] = new Type[4];
-        types[0] = fastFood;
-        types[1] = fineDining;
-        types[2] = bistro;
-        types[3] = vegan;
-
-        searchParams.setTypes(types);
-
-        SortBy price = new SortBy();
-        price.setChecked("");
-        price.setName("Price");
-
-        SortBy name = new SortBy();
-        name.setChecked("checked");
-        name.setName("Name");
-
-        SortBy restaurant = new SortBy();
-        restaurant.setChecked("");
-        restaurant.setName("Restaurant");
-
-        SortBy type = new SortBy();
-        type.setChecked("");
-        type.setName("Type");
-
-        SortBy sortBy[] = new SortBy[4];
-        sortBy[0] = price;
-        sortBy[1] = name;
-        sortBy[2] = restaurant;
-        sortBy[3] = type;
-
-        searchParams.setSortBy(sortBy);
-
-        SortBy ascending = new SortBy();
-        ascending.setChecked("checked");
-        ascending.setName("Ascending");
-
-        SortBy descending = new SortBy();
-        descending.setChecked("");
-        descending.setName("Descending");
-
-        SortBy ordering[] = new SortBy[2];
-        ordering[0] = ascending;
-        ordering[1] = descending;
-
-        searchParams.setOrdering(ordering);
-
-
-
-        return searchParams;
-    }
 }
