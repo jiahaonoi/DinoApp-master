@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
         OfferDialogFragment.show(fm,"fragment_name");
     }
 
-    private void showSearchDialog(){
+    public void showSearchDialog(View view){
         android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
         Log.d("MyApp",height+","+width);
         //Set screen size to DialogFragment
@@ -126,7 +126,6 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
         ListView list = (ListView) findViewById(R.id.list);
         list.setAdapter(adapter);
     }
-
     //Adapter for ListView
     private class MyListAdapter extends ArrayAdapter<Offer> {
         MyListAdapter(){
@@ -169,9 +168,6 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
                 showOfferProfileDialog();
             }
         });
-    }
-    private void loadOffers() {
-
     }
     // Loads Offers From Web Server based on jsonString representation of searchParams.
     private void loadOffers(SearchParams searchParams) {
