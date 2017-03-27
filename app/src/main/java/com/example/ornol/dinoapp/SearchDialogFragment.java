@@ -8,6 +8,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioGroup;
+import android.widget.Toast;
 
 
 /**
@@ -23,6 +25,7 @@ public class SearchDialogFragment extends DialogFragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static OfferList theOfferList;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -53,8 +56,9 @@ public class SearchDialogFragment extends DialogFragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        theOfferList = OfferList.getInstance();
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -65,6 +69,7 @@ public class SearchDialogFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search_dialog, container, false);
+        setSortByCheckedInView(view);
         getDialog().setTitle("Search");
         return view;
     }
@@ -86,7 +91,37 @@ public class SearchDialogFragment extends DialogFragment {
                     + " must implement OnFragmentInteractionListener");
         }
     }
+    // Displays correctly which 'Sort By' options are selected in SearchParams
+    public void setSortByCheckedInView(View view)  {
+        try {
+            RadioGroup r = (RadioGroup) view.findViewById(R.id.sort_by_radio_group);
+            String checkedSortBy = theOfferList.getSearchParams().getCheckedSortBy();
+            Toast.makeText(getContext(),checkedSortBy,Toast.LENGTH_LONG).show();
+            switch (checkedSortBy){
+                case "Name":
+                    r.check(R.id.sort_by_name);
+                    break;
+                case "Price":
+                    r.check(R.id.sort_by_price);
+                    break;
+                case "Restaurant":
+                    r.check(R.id.sort_by_restaurant);
+                    break;
+                case "Type":
+                    r.check(R.id.sort_by_type);
+                    break;
+                default:
+                    throw new IllegalArgumentException("Invalid checked radio button "+theOfferList);
+            }
+        } catch (NullPointerException e) {
+            Toast.makeText(getContext(),"FAILED",Toast.LENGTH_LONG).show();
+            System.err.println("NullPointerException: "+e.getMessage());
+        }
+    }
 
+    //TODO: Implement interactivity
+    public void onRadioButtonClicked(View view){
+    }
     @Override
     public void onDetach() {
         super.onDetach();
@@ -103,7 +138,6 @@ public class SearchDialogFragment extends DialogFragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);

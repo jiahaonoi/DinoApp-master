@@ -3,4 +3,19 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="price">Price</string>
+    <string name="name">Name</string>
+    <string name="restaurant">Restaurant</string>
+    <string name="type">Type</string>
+    <string name="search_hint">Type your search here</string>
+    <string name="type_hint">Select which types of offers to search for</string>
+    <string name="sort_by">Sort by:</string>
+    <string name="fast_food">Fast Food</string>
+    <string name="fine_dining">Fine Dining</string>
+    <string name="bistro">Bistro</string>
+    <string name="vegan">Vegan</string>
+    <string name="search">Search</string>
+    <string name="ascending">Ascending</string>
+    <string name="descending">Descending</string>
+    <string name="ascending_or_descending_order">Ascending or descending order?</string>
 </resources>

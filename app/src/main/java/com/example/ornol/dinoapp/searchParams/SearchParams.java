@@ -55,7 +55,21 @@ public class SearchParams {
     public void setSortBy(SortBy[] sortBy) {
         this.sortBy = sortBy;
     }
-
+    public String getCheckedSortBy(){
+        String s = "something went wrong";
+        for(int i=0;i<sortBy.length;i++){
+            if(sortBy[i].getChecked().equals("checked")) {
+                return sortBy[i].getName();
+            }
+        }
+        return s;
+    }
+    public void setCheckedSortBy(int n) {
+        for(int i=0;i<sortBy.length;i++){
+            sortBy[i].setChecked("");
+        }
+        sortBy[n].setChecked("checked");
+    }
     public SortBy[] getOrdering() {
         return ordering;
     }

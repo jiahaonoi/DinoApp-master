@@ -8,35 +8,128 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Search by text"
+            android:hint="@string/search_hint"
             android:gravity="center_horizontal"
             android:maxLines="1"
             />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sort_by"/>
         <RadioGroup
-            android:layout_width="match_parent"
+            android:id="@+id/sort_by_radio_group"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center">
             <RadioButton
+                android:id="@+id/sort_by_price"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Price"/>
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:button="@android:color/transparent"
+                android:drawableTop="@android:drawable/btn_radio"
+                android:padding="5dp"
+                android:drawablePadding="-10dp"
+                android:text="@string/price"/>
             <RadioButton
+                android:id="@+id/sort_by_name"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Name"/>
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:button="@android:color/transparent"
+                android:drawableTop="@android:drawable/btn_radio"
+                android:padding="5dp"
+                android:drawablePadding="-10dp"
+                android:text="@string/name"/>
             <RadioButton
+                android:id="@+id/sort_by_restaurant"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Restaurant"/>
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:button="@android:color/transparent"
+                android:drawableTop="@android:drawable/btn_radio"
+                android:padding="5dp"
+                android:drawablePadding="-10dp"
+                android:text="@string/restaurant"/>
             <RadioButton
+                android:id="@+id/sort_by_type"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Type"/>
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:button="@android:color/transparent"
+                android:drawableTop="@android:drawable/btn_radio"
+                android:padding="5dp"
+                android:drawablePadding="-10dp"
+                android:text="@string/type"/>
         </RadioGroup>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/ascending_or_descending_order"/>
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/ascending"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:button="@android:color/transparent"
+                android:drawableTop="@android:drawable/btn_radio"
+                android:padding="5dp"
+                android:drawablePadding="-10dp"
+                android:text="@string/ascending"/>
+            <RadioButton
+                android:id="@+id/descending"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:button="@android:color/transparent"
+                android:drawableTop="@android:drawable/btn_radio"
+                android:padding="5dp"
+                android:drawablePadding="-10dp"
+                android:text="@string/descending"/>
+        </RadioGroup>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:text="@string/type_hint"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+            <!--TODO: make it easier to add and remove options,maybe load from resources?-->
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fast_food"/>
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fine_dining"/>
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/bistro"/>
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/vegan"/>
+        </LinearLayout>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/search"/>
     </LinearLayout>
 </FrameLayout>
