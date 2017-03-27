@@ -1,28 +1,22 @@
 package com.example.ornol.dinoapp;
 
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.View;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
-import 	android.view.MenuInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.ArrayList;
-
 
 import com.example.ornol.dinoapp.http.ApiCall;
 import com.example.ornol.dinoapp.json.JsonJavaConverter;
@@ -32,17 +26,19 @@ import com.example.ornol.dinoapp.searchParams.SortBy;
 import com.example.ornol.dinoapp.searchParams.Type;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.OkHttpClient;
 
-public class MainActivity extends AppCompatActivity implements LoginFragment.OnFragmentInteractionListener,SignupFragment.OnFragmentInteractionListener,OfferProfileDialogFragment.OnFragmentInteractionListener{
+public class MainActivity extends AppCompatActivity implements LoginFragment.OnFragmentInteractionListener,SignupFragment.OnFragmentInteractionListener,OfferProfileDialogFragment.OnFragmentInteractionListener,SearchDialogFragment.OnFragmentInteractionListener{
 
     // OkHttpClient for API Calls
      private OkHttpClient client;
     private static OfferProfileDialogFragment OfferDialogFragment = new OfferProfileDialogFragment();
     private static LoginFragment editNameDialogFragment = new LoginFragment();
     private static SignupFragment SDialogFragment = new SignupFragment();
+    private static SearchDialogFragment searchDialog = new SearchDialogFragment();
     private List<Offer> myList = new ArrayList<>();
 
     @Override
@@ -91,6 +87,13 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
         //Set screen size to DialogFragment
         OfferDialogFragment.setSize(width, height);
         OfferDialogFragment.show(fm,"fragment_name");
+    }
+    private void showSearchDialog(){
+        android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
+        Log.d("MyApp",height+","+width);
+        //Set screen size to DialogFragment
+        searchDialog.setSize(width, height);
+        searchDialog.show(fm,"fragment_edit_name");
     }
 
 
