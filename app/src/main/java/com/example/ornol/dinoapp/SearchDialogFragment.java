@@ -96,7 +96,6 @@ public class SearchDialogFragment extends DialogFragment {
         try {
             RadioGroup r = (RadioGroup) view.findViewById(R.id.sort_by_radio_group);
             String checkedSortBy = theOfferList.getSearchParams().getCheckedSortBy();
-            Toast.makeText(getContext(),checkedSortBy,Toast.LENGTH_LONG).show();
             switch (checkedSortBy){
                 case "Name":
                     r.check(R.id.sort_by_name);
@@ -144,7 +143,7 @@ public class SearchDialogFragment extends DialogFragment {
          }
     public void setSize(int width, int height) {
         this.width = width;
-        this.height = height*5/10;
+        this.height = height;
         }
     int width = 0;
     int height = 0;

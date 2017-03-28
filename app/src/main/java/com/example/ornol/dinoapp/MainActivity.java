@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
         android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
         Log.d("MyApp",height+","+width);
         //Set screen size to DialogFragment
-        //searchDialog.setSize(width, height);
+        searchDialog.setSize(width, height);
         searchDialog.show(fm,"fragment_edit_name");
     }
 
