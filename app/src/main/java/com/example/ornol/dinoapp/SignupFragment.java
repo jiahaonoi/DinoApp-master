@@ -16,6 +16,7 @@ import android.widget.EditText;
 import com.example.ornol.dinoapp.http.ApiCall;
 import com.example.ornol.dinoapp.json.JsonJavaConverter;
 import com.example.ornol.dinoapp.users.User;
+import com.example.ornol.dinoapp.users.Validation;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -143,8 +144,10 @@ public class SignupFragment extends DialogFragment implements View.OnClickListen
         switch(v.getId()){
             case R.id.signup:
                 // TODO: Validation
-                User user = userFromInputFields();
-                createUser(user);
+                if(validateInputFields()){
+                    User user = userFromInputFields();
+                    createUser(user);
+                }
                 break;
             default:
                 break;
@@ -165,6 +168,77 @@ public class SignupFragment extends DialogFragment implements View.OnClickListen
                         edits[9].getText().toString());
         return user;
     }
+
+    // Checks if input fields are valid.
+    // Sets error message on the input fields if they are invalid.
+    // Returns a boolean, true if valid, false otherwise.
+    private boolean validateInputFields(){
+        Validation validation = new Validation();
+        boolean isValid = true;
+        if (!validation.restaurantNameValid(edits[0].getText().toString())) {
+            edits[0].setError("Restaurant name is invalid.");
+            isValid = false;
+        }
+
+        if(!validation.emailValid(edits[1].getText().toString())){
+            edits[1].setError("Email is invalid.");
+            isValid = false;
+        }
+
+        if(!validation.passwordValid(edits[2].getText().toString())){
+            edits[2].setError("Password is invalid.");
+            isValid = false;
+        }
+
+        if(!validation.passwordsMatch(edits[2].getText().toString(), edits[3].getText().toString())){
+            edits[3].setError("Passwords don't match.");
+            isValid = false;
+        }
+
+        try {
+            if (!validation.phonenumberValid(Integer.parseInt(edits[4].getText().toString()))) {
+                edits[4].setError("Phonenumber is invalid.");
+                isValid = false;
+            }
+        } catch (Exception e){
+            edits[4].setError("Phonenumber is invalid.");
+            isValid = false;
+        }
+
+        if(!validation.urlValid(edits[5].getText().toString())){
+            edits[5].setError("Website URL is invalid.");
+            isValid = false;
+        }
+
+        if(!validation.addressValid(edits[6].getText().toString())){
+            edits[6].setError("Address is invalid.");
+            isValid = false;
+        }
+
+        if(!validation.cityValid(edits[7].getText().toString())){
+            edits[7].setError("City is invalid.");
+            isValid = false;
+        }
+
+        try {
+
+            if (!validation.postCodeValid(Integer.parseInt(edits[8].getText().toString()))) {
+                edits[8].setError("Postal code is invalid.");
+                isValid = false;
+            }
+        } catch (Exception e) {
+            edits[8].setError("Postal code is invalid.");
+            isValid = false;
+        }
+
+        if(!validation.descriptionValid(edits[9].getText().toString())){
+            edits[9].setError("Description is invalid.");
+            isValid = false;
+        }
+
+        return isValid;
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated

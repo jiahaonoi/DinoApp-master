@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     >
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
 
     <LinearLayout
         android:orientation="vertical"
@@ -14,78 +19,86 @@
         android:paddingLeft="24dp"
         android:paddingRight="24dp">
 
+
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:id="@+id/restaurantName"
-            android:text="Restaurant Name"/>
+            android:hint="Restaurant Name"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:id="@+id/email"
-            android:text="Email"/>
+            android:hint="Email"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:id="@+id/Password"
-            android:text="Password"/>
+            android:hint="Password"
+            android:inputType="textPassword"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:id="@+id/PasswordConfirmation"
-            android:text="Password Again"/>
+            android:hint="Password Again"
+            android:inputType="textPassword"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:id="@+id/PhoneNumber"
-            android:text="Phone Number"/>
+            android:hint="Phone Number"
+            android:inputType="phone"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:id="@+id/Website"
-            android:text="Website"/>
+            android:hint="Website URL"
+            android:inputType="textUri"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:id="@+id/Address"
-            android:text="Address"/>
+            android:hint="Address"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:id="@+id/City"
-            android:text="City"/>
+            android:hint="City"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:id="@+id/PostalCode"
-            android:text="Postal Code"/>
+            android:hint="Postal Code"
+            android:inputType="number"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:id="@+id/Description"
-            android:text="Description"/>
+            android:hint="Description"
+            android:inputType="textMultiLine"/>
 
     </LinearLayout>
+    </ScrollView>
 
     <Button
         android:layout_width="match_parent"

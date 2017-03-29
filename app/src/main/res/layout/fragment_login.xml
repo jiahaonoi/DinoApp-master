@@ -26,14 +26,15 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:id="@+id/Password"
-            android:text="Password"/>
+            android:hint="Password"
+            android:inputType="textPassword"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:id="@+id/Signup"
-            android:text="Login"
+            android:hint="Login"
             android:onClick="Login" />
     </LinearLayout>
 
