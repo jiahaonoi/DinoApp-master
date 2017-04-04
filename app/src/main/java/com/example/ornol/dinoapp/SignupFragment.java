@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.ornol.dinoapp.http.ApiCall;
 import com.example.ornol.dinoapp.json.JsonJavaConverter;
@@ -176,17 +177,18 @@ public class SignupFragment extends DialogFragment implements View.OnClickListen
         Validation validation = new Validation();
         boolean isValid = true;
         if (!validation.restaurantNameValid(edits[0].getText().toString())) {
-            edits[0].setError("Restaurant name is invalid.");
+            edits[0].setError("Restaurant name needs to include at least one character.");
             isValid = false;
         }
 
         if(!validation.emailValid(edits[1].getText().toString())){
-            edits[1].setError("Email is invalid.");
+
+            edits[1].setError("Email should be like example@example.com.");
             isValid = false;
         }
 
         if(!validation.passwordValid(edits[2].getText().toString())){
-            edits[2].setError("Password is invalid.");
+            edits[2].setError("Password should have length no less than 5.");
             isValid = false;
         }
 
@@ -197,37 +199,37 @@ public class SignupFragment extends DialogFragment implements View.OnClickListen
 
         try {
             if (!validation.phonenumberValid(Integer.parseInt(edits[4].getText().toString()))) {
-                edits[4].setError("Phonenumber is invalid.");
+                edits[4].setError("Phonenumber should be 7 digits.");
                 isValid = false;
             }
         } catch (Exception e){
-            edits[4].setError("Phonenumber is invalid.");
+            edits[4].setError("Phonenumber should be 7 digits.");
             isValid = false;
         }
 
         if(!validation.urlValid(edits[5].getText().toString())){
-            edits[5].setError("Website URL is invalid.");
+            edits[5].setError("Website URL should be like http://example.com.");
             isValid = false;
         }
 
         if(!validation.addressValid(edits[6].getText().toString())){
-            edits[6].setError("Address is invalid.");
+            edits[6].setError("Address should not be empty.");
             isValid = false;
         }
 
         if(!validation.cityValid(edits[7].getText().toString())){
-            edits[7].setError("City is invalid.");
+            edits[7].setError("City should not be empty.");
             isValid = false;
         }
 
         try {
 
             if (!validation.postCodeValid(Integer.parseInt(edits[8].getText().toString()))) {
-                edits[8].setError("Postal code is invalid.");
+                edits[8].setError("Postal code should be of length 3.");
                 isValid = false;
             }
         } catch (Exception e) {
-            edits[8].setError("Postal code is invalid.");
+            edits[8].setError("Postal code should be of length 3.");
             isValid = false;
         }
 
@@ -276,7 +278,7 @@ public class SignupFragment extends DialogFragment implements View.OnClickListen
                     // Check if signup was successful:
                     if(result){
                         // Handle Signup Success.........  TODO: Success message, close fragment
-                        Log.d("Success: ", "WOHO!" );
+                        Toast.makeText(getActivity(), "Success", Toast.LENGTH_LONG).show();
                     }else{
                         // Handle Signup Failure......... TODO: Failure message, stay on fragment
                         Log.d("Failure: ", ":((((");

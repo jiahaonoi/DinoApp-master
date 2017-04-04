@@ -1,5 +1,9 @@
 package com.example.ornol.dinoapp.users;
 
+import android.util.Log;
+
+import java.net.URL;
+
 /**
  * Created by gudbjartursigurbergsson on 29/03/2017.
  */
@@ -7,39 +11,52 @@ package com.example.ornol.dinoapp.users;
 // Todo implement the methods in this class
 public class Validation {
     public boolean restaurantNameValid(String restaurantName){
-        return false;
+        if(restaurantName.length() == 0) return false;
+        return true;
     }
 
     public boolean emailValid(String email){
-        return false;
+        String EMAIL_REGEX = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+        return email.matches(EMAIL_REGEX);
     }
 
     public boolean passwordValid(String password){
-        return false;
+        if(password.length() < 5) return false;
+        return true;
     }
 
     public boolean passwordsMatch(String password, String password2){
+        if(password.equals(password2)) return true;
         return false;
     }
 
     public boolean phonenumberValid(int phonenumber) {
-        return false;
+        if(String.valueOf(phonenumber).length() != 7) return false;
+        return true;
     }
 
     public boolean urlValid(String url){
-        return false;
+        try {
+            URL urlValid = new URL(url);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 
     public boolean addressValid(String address){
-        return false;
+        if(address.length() == 0) return false;
+        return true;
     }
 
     public boolean cityValid(String city){
-        return false;
+        if(city.length() == 0) return false;
+        return true;
     }
 
     public boolean postCodeValid(int postCode){
-        return false;
+        if(String.valueOf(postCode).length() != 3) return false;
+        return true;
     }
 
     public boolean descriptionValid(String description){
