@@ -10,6 +10,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -285,10 +287,8 @@ public class SignupFragment extends DialogFragment implements View.OnClickListen
                             @Override
                             public void run() {
                                 Toast.makeText(getContext(), "Successfully created a new account.", Toast.LENGTH_LONG).show();
-                                Intent i = new Intent(getActivity(), MainActivity.class);
-                                startActivity(i);
-                                (getActivity()).overridePendingTransition(0,0);
 
+                                SignupFragment.super.dismiss();
                             }
                         });
                     }else{
