@@ -1,9 +1,13 @@
 package com.example.ornol.dinoapp;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -144,7 +148,6 @@ public class SignupFragment extends DialogFragment implements View.OnClickListen
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.signup:
-                // TODO: Validation
                 if(validateInputFields()){
                     User user = userFromInputFields();
                     createUser(user);
@@ -278,10 +281,24 @@ public class SignupFragment extends DialogFragment implements View.OnClickListen
                     // Check if signup was successful:
                     if(result){
                         // Handle Signup Success.........  TODO: Success message, close fragment
-                        Toast.makeText(getActivity(), "Success", Toast.LENGTH_LONG).show();
+                        new Handler(Looper.getMainLooper()).post(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(getContext(), "Successfully created a new account.", Toast.LENGTH_LONG).show();
+                                Intent i = new Intent(getActivity(), MainActivity.class);
+                                startActivity(i);
+                                (getActivity()).overridePendingTransition(0,0);
+
+                            }
+                        });
                     }else{
-                        // Handle Signup Failure......... TODO: Failure message, stay on fragment
-                        Log.d("Failure: ", ":((((");
+                        new Handler(Looper.getMainLooper()).post(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(getContext(),"Failed to create an account, try again.",Toast.LENGTH_LONG).show();
+
+                            }
+                        });
                     }
 
                 } catch (IOException e) {

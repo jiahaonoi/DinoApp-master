@@ -67,7 +67,7 @@ public class OfferProfileDialogFragment extends android.support.v4.app.DialogFra
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        //getDialog().getWindow().setLayout(600,800);
+//        getDialog().getWindow().setLayout(600,800);
     }
     int width = 0;
     int height = 0;
