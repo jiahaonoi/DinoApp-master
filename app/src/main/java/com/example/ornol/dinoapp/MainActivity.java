@@ -1,5 +1,6 @@
 package com.example.ornol.dinoapp;
 
+import android.app.FragmentTransaction;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,12 +23,14 @@ import com.example.ornol.dinoapp.http.ApiCall;
 import com.example.ornol.dinoapp.json.JsonJavaConverter;
 import com.example.ornol.dinoapp.searchParams.SearchParams;
 
+import org.xml.sax.ErrorHandler;
+
 import java.io.IOException;
 import java.util.List;
 
 import okhttp3.OkHttpClient;
 
-public class MainActivity extends AppCompatActivity implements LoginFragment.OnFragmentInteractionListener,SignupFragment.OnFragmentInteractionListener,OfferProfileDialogFragment.OnFragmentInteractionListener,SearchDialogFragment.OnFragmentInteractionListener{
+public class MainActivity extends AppCompatActivity implements ErrorHandle.OnFragmentInteractionListener,LoginFragment.OnFragmentInteractionListener,SignupFragment.OnFragmentInteractionListener,OfferProfileDialogFragment.OnFragmentInteractionListener,SearchDialogFragment.OnFragmentInteractionListener{
 
     // OkHttpClient for API Calls
     private OkHttpClient client;
@@ -34,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
     private static LoginFragment editNameDialogFragment = new LoginFragment();
     private static SignupFragment SDialogFragment = new SignupFragment();
     private static SearchDialogFragment searchDialog = new SearchDialogFragment();
+    private static ErrorHandle EHDialogFragment = new ErrorHandle();
     private OfferList theOfferList = OfferList.getInstance();
     private MyListAdapter mAdapter;
 
@@ -41,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        EHDialogFragment.set(this);
         ClickCallback();
 
         // Initialize the OkHttpClient
@@ -58,6 +63,11 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
     protected void getList(){
         loadOffers(theOfferList.getSearchParams());
         setScreenSize();
+    }
+
+    public void refreshMain(){
+        loadOffers(theOfferList.getSearchParams());
+        EHDialogFragment.closefragment();
     }
 
     public void onFragmentInteraction(Uri uri){
@@ -87,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
         SDialogFragment.setSize(width, height);
         SDialogFragment.show(fm, "fragment_edit_name");
     }
+
     private void showOfferProfileDialog(Offer offer){
         android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
         Log.d("MyApp",height+","+width);
@@ -105,6 +116,14 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
         searchDialog.show(fm,"fragment_edit_name");
     }
 
+    public void showErrorDialog(){
+        android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
+        Log.d("MyApp",height+","+width);
+        //Set screen size to DialogFragment
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        EHDialogFragment.setSize(width, height);
+        EHDialogFragment.show(ft, "fragment_edit_name");
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -150,6 +169,9 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
             if (itemView == null) {
                 itemView = getLayoutInflater().inflate(R.layout.item_view, parent, false);
             }
+            int size = itemView.getLayoutParams().width;
+            itemView.setLayoutParams(new ViewGroup.LayoutParams(width/9*10,height/9*2 ));
+
             Offer currentItem = theOfferList.getOffers().get(position);
             ImageView imageView = (ImageView) itemView.findViewById(R.id.image);
             imageView.setImageResource(R.drawable.humberger);
@@ -159,9 +181,6 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
 
             TextView price = (TextView) itemView.findViewById(R.id.price);
             price.setText("Price:" + currentItem.getPrice());
-
-            TextView description = (TextView) itemView.findViewById(R.id.description);
-            description.setText("Description:" + currentItem.getDescription());
             return itemView;
         }
     }
@@ -175,9 +194,9 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
                 int itemPosition     = position;
 
                 // Show Alert
-//                Toast.makeText(getApplicationContext(),
-//                        "Position :", Toast.LENGTH_LONG)
-//                        .show();
+                //Toast.makeText(getApplicationContext(),
+                //        "Position :"+itemPosition, Toast.LENGTH_LONG)
+                //        .show();
                 Offer currentOffer = theOfferList.getOffers().get(position);
                 showOfferProfileDialog(currentOffer);
             }
@@ -218,6 +237,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
                         // Error in response
                         // Error handling ..... TODO
                         e.printStackTrace();
+                        showErrorDialog();
 //                        Log.d("Failure: ", e.toString());
                     }
 
@@ -228,6 +248,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
                 return null;
             }
         }.execute();
+
     }
 
 

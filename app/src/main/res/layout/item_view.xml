@@ -17,7 +17,7 @@
         android:padding="20dp"
         android:background="@drawable/shape"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="50"
         android:orientation="vertical"
         >
@@ -33,11 +33,5 @@
             android:text="hahaha"
             android:id="@+id/price"
         />
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="hahaha"
-            android:id="@+id/description"
-            />
     </LinearLayout>
 </LinearLayout>
