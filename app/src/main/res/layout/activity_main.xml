@@ -5,12 +5,17 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical">
+
     <Button
         android:id="@+id/search_button"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Search"
-        android:onClick="showSearchDialog"/>
+        android:layout_height="72dp"
+        android:layout_marginTop="2dp"
+        android:elevation="7dp"
+        android:onClick="showSearchDialog"
+        android:text="Search"/>
+
     <ListView
         android:id="@+id/list"
         android:layout_width="match_parent"
