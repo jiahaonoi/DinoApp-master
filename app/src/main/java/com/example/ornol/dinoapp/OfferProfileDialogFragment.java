@@ -97,7 +97,7 @@ public class OfferProfileDialogFragment extends android.support.v4.app.DialogFra
         image.setImageResource(R.drawable.humberger);
         name.setText(""+offer.getName());
         restauranName.setText(""+offer.getRestName());
-        price.setText(""+offer.getPrice());
+        price.setText(""+offer.getPrice()+" kr");
         type.setText(""+offer.getType());
         description.setText(""+offer.getDescription());
 
