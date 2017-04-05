@@ -4,65 +4,63 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="100" >
-    <LinearLayout
-        android:layout_height="0dp"
-        android:layout_weight="50"
-        android:layout_margin="10dp"
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:weightSum="100">
+
         <ImageView
-            android:scaleType="fitXY"
             android:id="@+id/image"
-            android:background="@drawable/shape"
-            android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:layout_width="0dp"
-            android:padding="20dp"
-            android:layout_weight="70"/>
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="50"
+            android:padding="20dp" />
+
         <LinearLayout
-            android:padding="20dp"
-            android:background="@drawable/shape"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:layout_weight="30"
-            android:orientation="vertical">
+
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="25"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingTop="20dp">
 
             <TextView
+                android:gravity="center"
                 android:id="@+id/name"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="25"
-                android:text="hahaha"
-                android:layout_width="match_parent"/>
+                android:text="hahaha" />
+
             <TextView
+                android:gravity="center"
                 android:id="@+id/restaurantName"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="25"
-                android:text="hahaha"
-                android:layout_width="match_parent"/>
+                android:text="hahaha" />
+
             <TextView
+                android:gravity="center"
                 android:id="@+id/price"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="25"
-                android:text="hahaha"
-                android:layout_width="match_parent"/>
+                android:text="hahaha" />
+
             <TextView
+                android:gravity="center"
                 android:id="@+id/type"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="25"
-                android:text="hahaha"
-                android:layout_width="match_parent"/>
+                android:text="hahaha" />
         </LinearLayout>
-    </LinearLayout>
+
     <TextView
-        android:background="@drawable/shape"
+        android:gravity="center"
         android:id="@+id/Description"
-        android:layout_margin="20dp"
-        android:padding="20dp"
-        android:layout_height="0dp"
-        android:text="hahaha"
-        android:layout_weight="50"
         android:layout_width="match_parent"
-        />
+        android:layout_height="0dp"
+        android:layout_weight="25"
+        android:padding="20dp"
+        android:text="hahaha" />
 </LinearLayout>

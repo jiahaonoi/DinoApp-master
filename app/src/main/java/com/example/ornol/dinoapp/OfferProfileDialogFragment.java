@@ -73,7 +73,7 @@ public class OfferProfileDialogFragment extends android.support.v4.app.DialogFra
     int height = 0;
     public void setSize(int width, int height){
         this.width = width;
-        this.height = height;
+        this.height = height*7/10;
     }
     @Override
     public void onResume(){
