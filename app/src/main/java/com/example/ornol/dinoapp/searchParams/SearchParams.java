@@ -55,6 +55,7 @@ public class SearchParams {
     public void setSortBy(SortBy[] sortBy) {
         this.sortBy = sortBy;
     }
+
     public String getCheckedSortBy(){
         String s = "something went wrong";
         for(int i=0;i<sortBy.length;i++){
@@ -64,12 +65,14 @@ public class SearchParams {
         }
         return s;
     }
+
     public void setCheckedSortBy(int n) {
         for(int i=0;i<sortBy.length;i++){
             sortBy[i].setChecked("");
         }
         sortBy[n].setChecked("checked");
     }
+
     public SortBy[] getOrdering() {
         return ordering;
     }
@@ -78,6 +81,15 @@ public class SearchParams {
         this.ordering = ordering;
     }
 
+    public String getCheckedOrdering(){
+        String s = "something went wrong";
+        for(int i=0;i<ordering.length;i++){
+            if(ordering[i].getChecked().equals("checked")) {
+                return ordering[i].getName();
+            }
+        }
+        return s;
+    }
     public static SearchParams initSearchParams() {
         SearchParams searchParams = new SearchParams();
 

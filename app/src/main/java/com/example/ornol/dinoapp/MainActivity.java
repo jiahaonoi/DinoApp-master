@@ -16,7 +16,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.ornol.dinoapp.http.ApiCall;
 import com.example.ornol.dinoapp.json.JsonJavaConverter;
@@ -36,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
     private static SignupFragment SDialogFragment = new SignupFragment();
     private static SearchDialogFragment searchDialog = new SearchDialogFragment();
     private OfferList theOfferList = OfferList.getInstance();
+    private MyListAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +46,16 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
 
         // Initialize the OkHttpClient
         client = new OkHttpClient();
+        getList();
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        getList();
+    }
+
+    protected void getList(){
         loadOffers(theOfferList.getSearchParams());
         setScreenSize();
     }
@@ -124,10 +134,11 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
     //-----------------------------------------ListView-----------------------------
 
     public void populateListView(){
-        MyListAdapter adapter = new MyListAdapter();
+        mAdapter = new MyListAdapter();
         ListView list = (ListView) findViewById(R.id.list);
-        list.setAdapter(adapter);
+        list.setAdapter(mAdapter);
     }
+
     //Adapter for ListView
     private class MyListAdapter extends ArrayAdapter<Offer> {
         MyListAdapter(){
@@ -172,6 +183,11 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
             }
         });
     }
+
+    public void onSearchButtonClicked(View view) {
+        getList();
+    }
+
     // Loads Offers From Web Server based on jsonString representation of searchParams.
     private void loadOffers(SearchParams searchParams) {
         JsonJavaConverter jsonJavaConverter = new JsonJavaConverter();

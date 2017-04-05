@@ -74,13 +74,6 @@ public class SearchDialogFragment extends DialogFragment {
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -95,7 +88,9 @@ public class SearchDialogFragment extends DialogFragment {
     public void setSortByCheckedInView(View view)  {
         try {
             RadioGroup r = (RadioGroup) view.findViewById(R.id.sort_by_radio_group);
+            RadioGroup s = (RadioGroup) view.findViewById(R.id.asc_desc);
             String checkedSortBy = theOfferList.getSearchParams().getCheckedSortBy();
+            String checkedOrdering = theOfferList.getSearchParams().getCheckedOrdering();
             switch (checkedSortBy){
                 case "Name":
                     r.check(R.id.sort_by_name);
@@ -108,6 +103,16 @@ public class SearchDialogFragment extends DialogFragment {
                     break;
                 case "Type":
                     r.check(R.id.sort_by_type);
+                    break;
+                default:
+                    throw new IllegalArgumentException("Invalid checked radio button "+theOfferList);
+            }
+            switch (checkedOrdering){
+                case "Ascending":
+                    s.check(R.id.ascending);
+                    break;
+                case "Descending":
+                    s.check(R.id.descending);
                     break;
                 default:
                     throw new IllegalArgumentException("Invalid checked radio button "+theOfferList);
@@ -126,7 +131,6 @@ public class SearchDialogFragment extends DialogFragment {
         super.onDetach();
         mListener = null;
     }
-
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
