@@ -77,9 +77,11 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
         SDialogFragment.setSize(width, height);
         SDialogFragment.show(fm, "fragment_edit_name");
     }
-    private void showOfferProfileDialog(){
+    private void showOfferProfileDialog(Offer offer){
         android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
         Log.d("MyApp",height+","+width);
+        // Get offer and send on
+        OfferDialogFragment.setOffer(offer);
         //Set screen size to DialogFragment
         OfferDialogFragment.setSize(width, height);
         OfferDialogFragment.show(fm,"fragment_name");
@@ -162,10 +164,11 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
                 int itemPosition     = position;
 
                 // Show Alert
-                Toast.makeText(getApplicationContext(),
-                        "Position :", Toast.LENGTH_LONG)
-                        .show();
-                showOfferProfileDialog();
+//                Toast.makeText(getApplicationContext(),
+//                        "Position :", Toast.LENGTH_LONG)
+//                        .show();
+                Offer currentOffer = theOfferList.getOffers().get(position);
+                showOfferProfileDialog(currentOffer);
             }
         });
     }

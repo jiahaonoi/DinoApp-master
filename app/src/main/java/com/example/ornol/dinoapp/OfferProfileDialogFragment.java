@@ -83,7 +83,8 @@ public class OfferProfileDialogFragment extends android.support.v4.app.DialogFra
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        populateOffer();
+//        populateOffer();
+        Offer offer = getOffer();
         myFragmentView =inflater.inflate(R.layout.offer_profile_view, container, false);
 
         ImageView image = (ImageView) myFragmentView.findViewById(R.id.image);
@@ -104,9 +105,18 @@ public class OfferProfileDialogFragment extends android.support.v4.app.DialogFra
     }
 
     public void populateOffer(){
-        offer = new Offer(123, "humberger", "Fast Food", 1200, new Date(), "testing description", new Date(),
-                "humberger.jpg", 123,"Dino", "20,Mars,2017","20,Mars,2018", new int[]{0,1,1,1,0,0,0});
+//        offer = new Offer(123, "humberger", "Fast Food", 1200, new Date(), "testing description", new Date(),
+//                "humberger.jpg", 123,"Dino", "20,Mars,2017","20,Mars,2018", new int[]{0,1,1,1,0,0,0});
     }
+
+    public Offer getOffer(){
+        return offer;
+    }
+
+    public void setOffer(Offer offer){
+        this.offer = offer;
+    }
+
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
