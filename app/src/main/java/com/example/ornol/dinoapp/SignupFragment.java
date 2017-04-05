@@ -153,6 +153,10 @@ public class SignupFragment extends DialogFragment implements View.OnClickListen
                 if(validateInputFields()){
                     User user = userFromInputFields();
                     createUser(user);
+                } else{
+                    String wrong="Signup did'nt success! :(((";
+                    Toast.makeText(getActivity(),
+                            "Position :"+wrong, Toast.LENGTH_LONG).show();
                 }
                 break;
             default:
