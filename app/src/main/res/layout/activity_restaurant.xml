@@ -41,7 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="10"
-                android:text="Address: Mjodd" />
+                android:text="Mjodd" />
 
             <TextView
                 android:gravity="center"
@@ -49,7 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="20"
-                android:text="Phone Number: 1234567" />
+                android:text="00354-1234567" />
 
             <TextView
                 android:gravity="center"
@@ -57,7 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="20"
-                android:text="Open Time :11.00 - 21.00" />
+                android:text="Open Hour : 11.00 - 21.00" />
 
             </LinearLayout>
 
@@ -75,12 +75,14 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:text="Add Offer"
+        android:id="@+id/addOffer"
         android:layout_weight="7.5"
         />
     <Button
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:text="Delete Offer"
+        android:id="@+id/deleteOffer"
         android:layout_weight="7.5"
     />
     <ListView

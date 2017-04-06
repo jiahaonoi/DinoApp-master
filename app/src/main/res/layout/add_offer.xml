@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Offer"
+        android:textSize="30sp"
+        android:layout_margin="10dp"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/OfferName1"
+        android:hint="Offer Name"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/OfferPrice"
+        android:hint="Offer Price"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <!--TODO: make it easier to add and remove options,maybe load from resources?-->
+        <CheckBox
+            android:id="@+id/fast_food"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fast_food"/>
+        <CheckBox
+            android:id="@+id/fine_dining"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fine_dining"/>
+        <CheckBox
+            android:id="@+id/bistro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/bistro"/>
+        <CheckBox
+            android:id="@+id/vegan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/vegan"/>
+    </LinearLayout>
+    <EditText
+        android:layout_width="match_parent"
+        android:id="@+id/edtInput"
+        android:background="@drawable/shape"
+        android:layout_height="wrap_content"
+        android:inputType="textCapSentences|textMultiLine"
+        android:gravity="top|left"
+        android:maxLength="2000"
+        android:layout_margin="20dp"
+        android:hint="Description of your offer!"
+        android:minLines="5"
+        android:maxLines="5"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/addOffer"
+        android:hint="Add Offer"
+        android:onClick="AddOffer" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/Cancel"
+        android:hint="Cancel"
+        android:onClick="Cancel" />
+</LinearLayout>
