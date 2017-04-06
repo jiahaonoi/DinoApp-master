@@ -19,7 +19,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:id="@+id/email"
-            android:text="Email"/>
+            android:hint="Email"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
