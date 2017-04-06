@@ -206,7 +206,7 @@ public class MainActivity extends AppCompatActivity implements ErrorHandle.OnFra
 
     public void onSearchButtonClicked(View view) {
         getList();
-
+        searchDialog.dismiss();
     }
 
     // Loads Offers From Web Server based on jsonString representation of searchParams.
