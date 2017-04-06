@@ -112,21 +112,29 @@
             android:gravity="center">
             <!--TODO: make it easier to add and remove options,maybe load from resources?-->
             <CheckBox
+                android:id="@+id/fast_food"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/fast_food"/>
+                android:text="@string/fast_food"
+                android:onClick="onCheckboxClicked"/>
             <CheckBox
+                android:id="@+id/fine_dining"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/fine_dining"/>
+                android:text="@string/fine_dining"
+                android:onClick="onCheckboxClicked"/>
             <CheckBox
+                android:id="@+id/bistro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/bistro"/>
+                android:text="@string/bistro"
+                android:onClick="onCheckboxClicked"/>
             <CheckBox
+                android:id="@+id/vegan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/vegan"/>
+                android:text="@string/vegan"
+                android:onClick="onCheckboxClicked"/>
         </LinearLayout>
         <Button
             android:layout_width="wrap_content"

@@ -14,12 +14,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.ornol.dinoapp.http.ApiCall;
 import com.example.ornol.dinoapp.json.JsonJavaConverter;
 import com.example.ornol.dinoapp.searchParams.SearchParams;
+import com.example.ornol.dinoapp.searchParams.Type;
 
 import java.io.IOException;
 import java.util.List;
@@ -207,6 +209,36 @@ public class MainActivity extends AppCompatActivity implements ErrorHandle.OnFra
     public void onSearchButtonClicked(View view) {
         getList();
         searchDialog.dismiss();
+    }
+
+    public void onCheckboxClicked(View view) {
+        boolean checked = ((CheckBox) view).isChecked();
+        Type type;
+        switch (view.getId()){
+            case R.id.fast_food:
+                type = theOfferList.getSearchParams().getTypes()[0];
+                if(checked) type.activate();
+                else type.deactivate();
+                break;
+            case R.id.fine_dining:
+                type = theOfferList.getSearchParams().getTypes()[1];
+                if(checked) type.activate();
+                else type.deactivate();
+                break;
+            case R.id.bistro:
+                type = theOfferList.getSearchParams().getTypes()[2];
+                if(checked) type.activate();
+                else type.deactivate();
+                break;
+            case R.id.vegan:
+                type = theOfferList.getSearchParams().getTypes()[3];
+                if(checked) type.activate();
+                else type.deactivate();
+                break;
+            default:
+                Log.d("CheckBox clicked","invalid id"+view.getId());
+                break;
+        }
     }
 
     // Loads Offers From Web Server based on jsonString representation of searchParams.

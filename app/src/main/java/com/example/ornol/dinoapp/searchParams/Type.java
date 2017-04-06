@@ -27,4 +27,8 @@ public class Type {
     public void setActive(String active) {
         this.active = active;
     }
+
+    public void activate() { setActive("active"); }
+    public void deactivate() { setActive(""); }
+
 }
