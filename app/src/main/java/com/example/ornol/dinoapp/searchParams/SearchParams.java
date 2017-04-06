@@ -75,6 +75,26 @@ public class SearchParams {
         sortBy[n].setChecked("checked");
     }
 
+    public void setCheckedSortBy(String s) {
+        switch(s){
+            case "price":
+                setCheckedSortBy(0);
+                break;
+            case "name":
+                setCheckedSortBy(1);
+                break;
+            case "restaurant":
+                setCheckedSortBy(2);
+                break;
+            case "type":
+                setCheckedSortBy(3);
+                break;
+            default:
+                Log.d("Modifying sortBy model","Invalid input "+s);
+                break;
+        }
+    }
+
     public SortBy[] getOrdering() {
         return ordering;
     }

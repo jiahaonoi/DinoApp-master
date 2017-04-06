@@ -79,7 +79,27 @@ public class SearchDialogFragment extends DialogFragment {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 // checkedId is the RadioButton selected
-                theOfferList.getSearchParams().setCheckedSortBy(checkedId);
+                // Get string for button chosen.
+                switch (checkedId){
+                    case R.id.sort_by_name:
+                        theOfferList.getSearchParams().setCheckedSortBy("name");
+                        break;
+                    case R.id.sort_by_price:
+                        theOfferList.getSearchParams().setCheckedSortBy("price");
+                        break;
+                    case R.id.sort_by_restaurant:
+                        theOfferList.getSearchParams().setCheckedSortBy("restaurant");
+                        break;
+                    case R.id.sort_by_type:
+                        theOfferList.getSearchParams().setCheckedSortBy("type");
+                        break;
+                    default:
+                        Log.d("Getting radioGroup id:","Invalid radiobutton id");
+                }
+                RadioButton button =(RadioButton) view.findViewById(checkedId);
+                Toast.makeText(getActivity(),
+                        button.getText(), Toast.LENGTH_SHORT).show();
+                //theOfferList.getSearchParams().setCheckedOrdering(name);
             }
         });
 
@@ -90,7 +110,7 @@ public class SearchDialogFragment extends DialogFragment {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 // checkedId is the RadioButton selected
-                String s = "something went wrong";
+                // Get string for button chosen.
                 switch (checkedId){
                     case R.id.ascending:
                         theOfferList.getSearchParams().setCheckedOrdering("ascending");
@@ -101,10 +121,7 @@ public class SearchDialogFragment extends DialogFragment {
                     default:
                         Log.d("Getting radioGroup id:","Invalid radiobutton id");
                 }
-                Log.d("Checked ID: ",""+checkedId);
                 RadioButton button =(RadioButton) view.findViewById(checkedId);
-                String name = String.valueOf(button.getText());
-                Log.d("Value of string: ",name);
                 Toast.makeText(getActivity(),
                         button.getText(), Toast.LENGTH_SHORT).show();
                 //theOfferList.getSearchParams().setCheckedOrdering(name);
