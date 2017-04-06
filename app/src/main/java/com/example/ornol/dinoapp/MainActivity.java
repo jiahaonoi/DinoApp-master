@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -22,8 +21,6 @@ import android.widget.TextView;
 import com.example.ornol.dinoapp.http.ApiCall;
 import com.example.ornol.dinoapp.json.JsonJavaConverter;
 import com.example.ornol.dinoapp.searchParams.SearchParams;
-
-import org.xml.sax.ErrorHandler;
 
 import java.io.IOException;
 import java.util.List;
@@ -57,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements ErrorHandle.OnFra
     @Override
     protected void onResume(){
         super.onResume();
+        theOfferList=OfferList.getInstance();
         getList();
     }
 

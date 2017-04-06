@@ -5,9 +5,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -25,7 +27,7 @@ public class SearchDialogFragment extends DialogFragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private static OfferList theOfferList;
+    private OfferList theOfferList;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -68,8 +70,46 @@ public class SearchDialogFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_search_dialog, container, false);
+        final View view = inflater.inflate(R.layout.fragment_search_dialog, container, false);
         setSortByCheckedInView(view);
+
+        RadioGroup sortBy = (RadioGroup) view.findViewById(R.id.sort_by_radio_group);
+        sortBy.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // checkedId is the RadioButton selected
+                theOfferList.getSearchParams().setCheckedSortBy(checkedId);
+            }
+        });
+
+
+        RadioGroup ordering = (RadioGroup) view.findViewById(R.id.asc_desc);
+        ordering.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // checkedId is the RadioButton selected
+                String s = "something went wrong";
+                switch (checkedId){
+                    case R.id.ascending:
+                        theOfferList.getSearchParams().setCheckedOrdering("ascending");
+                        break;
+                    case R.id.descending:
+                        theOfferList.getSearchParams().setCheckedOrdering("descending");
+                        break;
+                    default:
+                        Log.d("Getting radioGroup id:","Invalid radiobutton id");
+                }
+                Log.d("Checked ID: ",""+checkedId);
+                RadioButton button =(RadioButton) view.findViewById(checkedId);
+                String name = String.valueOf(button.getText());
+                Log.d("Value of string: ",name);
+                Toast.makeText(getActivity(),
+                        button.getText(), Toast.LENGTH_SHORT).show();
+                //theOfferList.getSearchParams().setCheckedOrdering(name);
+            }
+        });
         getDialog().setTitle("Search");
         return view;
     }
@@ -84,6 +124,7 @@ public class SearchDialogFragment extends DialogFragment {
                     + " must implement OnFragmentInteractionListener");
         }
     }
+
     // Displays correctly which 'Sort By' options are selected in SearchParams
     public void setSortByCheckedInView(View view)  {
         try {
@@ -123,9 +164,16 @@ public class SearchDialogFragment extends DialogFragment {
         }
     }
 
+
+
+    public void updateSearchParams(){
+
+    }
+
     //TODO: Implement interactivity
     public void onRadioButtonClicked(View view){
     }
+
     @Override
     public void onDetach() {
         super.onDetach();

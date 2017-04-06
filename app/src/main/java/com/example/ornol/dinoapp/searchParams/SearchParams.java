@@ -1,5 +1,7 @@
 package com.example.ornol.dinoapp.searchParams;
 
+import android.util.Log;
+
 /**
  * Created by gudbjartursigurbergsson on 22/03/2017.
  */
@@ -90,6 +92,27 @@ public class SearchParams {
         }
         return s;
     }
+
+    public void setCheckedOrdering(int n) {
+        for(int i=0;i<ordering.length;i++){
+            ordering[i].setChecked("");
+        }
+        ordering[n].setChecked("checked");
+    }
+    public void setCheckedOrdering(String s) {
+        switch(s) {
+            case "ascending":
+                setCheckedOrdering(0);
+                break;
+            case "descending":
+                setCheckedOrdering(1);
+                break;
+            default:
+                Log.d("Modifying asc-desc model","Invalid input "+s);
+                break;
+        }
+    }
+
     public static SearchParams initSearchParams() {
         SearchParams searchParams = new SearchParams();
 
