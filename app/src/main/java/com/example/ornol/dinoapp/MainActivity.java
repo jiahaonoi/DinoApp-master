@@ -115,7 +115,6 @@ public class MainActivity extends AppCompatActivity implements ErrorHandle.OnFra
     }
 
     public void showErrorDialog(){
-        android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
         Log.d("MyApp",height+","+width);
         //Set screen size to DialogFragment
         FragmentTransaction ft = getFragmentManager().beginTransaction();
@@ -171,14 +170,19 @@ public class MainActivity extends AppCompatActivity implements ErrorHandle.OnFra
             itemView.setLayoutParams(new ViewGroup.LayoutParams(width/9*10,height/9*2 ));
 
             Offer currentItem = theOfferList.getOffers().get(position);
-            ImageView imageView = (ImageView) itemView.findViewById(R.id.image);
-            imageView.setImageResource(R.drawable.humberger);
+            //ImageView imageView = (ImageView) itemView.findViewById(R.id.image);
+            //imageView.setImageResource(R.drawable.humberger);
 
             TextView name = (TextView) itemView.findViewById(R.id.name);
-            name.setText("Name:" + currentItem.getName());
+            name.setText(currentItem.getName());
 
             TextView price = (TextView) itemView.findViewById(R.id.price);
-            price.setText("Price:" + currentItem.getPrice());
+            price.setText(currentItem.getPrice()+" kr");
+
+            TextView type = (TextView) itemView.findViewById(R.id.type);
+            type.setText(currentItem.getType());
+
+
             return itemView;
         }
     }
@@ -207,6 +211,7 @@ public class MainActivity extends AppCompatActivity implements ErrorHandle.OnFra
 
     // Loads Offers From Web Server based on jsonString representation of searchParams.
     private void loadOffers(SearchParams searchParams) {
+        Log.d("W","Loadoffer running");
         JsonJavaConverter jsonJavaConverter = new JsonJavaConverter();
         final String jsonString = jsonJavaConverter.JavaObjectToJsonString(searchParams);
         final String url = "http://dino-web.herokuapp.com/api-offerlist";
@@ -228,6 +233,7 @@ public class MainActivity extends AppCompatActivity implements ErrorHandle.OnFra
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                Log.d("W","Loadoffer running!!!!");
                                 populateListView();
                             }
                         });
@@ -236,7 +242,6 @@ public class MainActivity extends AppCompatActivity implements ErrorHandle.OnFra
                         // Error handling ..... TODO
                         e.printStackTrace();
                         showErrorDialog();
-//                        Log.d("Failure: ", e.toString());
                     }
 
                 } catch (IOException e) {
@@ -246,7 +251,6 @@ public class MainActivity extends AppCompatActivity implements ErrorHandle.OnFra
                 return null;
             }
         }.execute();
-
     }
 
 

@@ -73,7 +73,7 @@ public class OfferProfileDialogFragment extends android.support.v4.app.DialogFra
     int height = 0;
     public void setSize(int width, int height){
         this.width = width;
-        this.height = height;
+        this.height = height*7/10;
     }
     @Override
     public void onResume(){
@@ -97,7 +97,7 @@ public class OfferProfileDialogFragment extends android.support.v4.app.DialogFra
         image.setImageResource(R.drawable.humberger);
         name.setText(""+offer.getName());
         restauranName.setText(""+offer.getRestName());
-        price.setText(""+offer.getPrice());
+        price.setText(""+offer.getPrice()+" kr");
         type.setText(""+offer.getType());
         description.setText(""+offer.getDescription());
 
