@@ -18,4 +18,5 @@
     <string name="ascending">Ascending</string>
     <string name="descending">Descending</string>
     <string name="ascending_or_descending_order">Ascending or descending order?</string>
+    <string name="title_activity_restaurant">RestaurantActivity</string>
 </resources>

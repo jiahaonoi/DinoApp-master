@@ -33,5 +33,7 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.0'
     compile 'com.squareup.okio:okio:1.11.0'
     compile 'com.squareup.okhttp3:okhttp:3.6.0'
+    compile 'com.android.support.constraint:constraint-layout:+'
+    compile 'com.android.support:design:25.3.0'
     testCompile 'junit:junit:4.12'
 }

@@ -1,0 +1,91 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="100" >
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="30"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp">
+        <ImageView
+            android:scaleType="fitXY"
+            android:id="@+id/image"
+            android:src="@drawable/restaurant"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="50" />
+        <LinearLayout
+            android:gravity="center"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="25"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingTop="20dp">
+
+            <TextView
+                android:gravity="center"
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="10"
+                android:textSize="15sp"
+                android:text="The Restaurant" />
+
+            <TextView
+                android:gravity="center"
+                android:id="@+id/restaurantName"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="10"
+                android:text="Address: Mjodd" />
+
+            <TextView
+                android:gravity="center"
+                android:id="@+id/price"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="20"
+                android:text="Phone Number: 1234567" />
+
+            <TextView
+                android:gravity="center"
+                android:id="@+id/type"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="20"
+                android:text="Open Time :11.00 - 21.00" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    <TextView
+        android:gravity="center"
+        android:id="@+id/Description"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="20"
+        android:padding="20dp"
+        android:text="We have Fast food, Berger, vegetables, sort drink" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="Add Offer"
+        android:layout_weight="7.5"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="Delete Offer"
+        android:layout_weight="7.5"
+    />
+    <ListView
+        android:id="@+id/listOffer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="35"/>
+</LinearLayout>

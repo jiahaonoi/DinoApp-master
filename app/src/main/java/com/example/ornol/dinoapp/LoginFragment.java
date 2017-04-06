@@ -3,14 +3,16 @@ package com.example.ornol.dinoapp;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app. DialogFragment;
+import android.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 
 /**
- * A simple {@link DialogFragment} subclass.
+ * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
  * {@link LoginFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
@@ -65,7 +67,22 @@ public class LoginFragment extends DialogFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         getDialog().setTitle("Login");
+        Button loginbutton = (Button) view.findViewById(R.id.login);
+        loginbutton.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                Login();
+            }
+        });
         return view;
+    }
+
+    public void Login(){
+        mListener.showRestaurantProfile();
+        closefragment();
+    }
+
+    public void closefragment() {
+        getActivity().getFragmentManager().beginTransaction().remove(this).commit();
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -105,7 +122,13 @@ public class LoginFragment extends DialogFragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+        void showRestaurantProfile();
     }
+
+    public void set(OnFragmentInteractionListener listener){
+        mListener = listener;
+    }
+
     public void setSize(int width, int height) {
         this.width = width;
         this.height = height*5/10;

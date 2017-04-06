@@ -1,6 +1,7 @@
 package com.example.ornol.dinoapp;
 
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements ErrorHandle.OnFra
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         EHDialogFragment.set(this);
+        editNameDialogFragment.set(this);
         ClickCallback();
 
         // Initialize the OkHttpClient
@@ -82,11 +84,12 @@ public class MainActivity extends AppCompatActivity implements ErrorHandle.OnFra
     int height = 0;
     int width = 0;
     private void showLoginDialog() {
-        android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
+        //android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
         Log.d("MyApp",height+","+width);
         //Set screen size to DialogFragment
         editNameDialogFragment.setSize(width, height);
-        editNameDialogFragment.show(fm, "fragment_edit_name");
+        editNameDialogFragment.show(ft,"fragment_edit_name");
     }
 
     private void showSignupDialog() {
@@ -105,6 +108,11 @@ public class MainActivity extends AppCompatActivity implements ErrorHandle.OnFra
         //Set screen size to DialogFragment
         OfferDialogFragment.setSize(width, height);
         OfferDialogFragment.show(fm,"fragment_name");
+    }
+
+    public void showRestaurantProfile(){
+        Intent intent = new Intent(this, RestaurantActivity.class);
+        startActivity(intent);
     }
 
     public void showSearchDialog(View view){
@@ -187,7 +195,10 @@ public class MainActivity extends AppCompatActivity implements ErrorHandle.OnFra
             return itemView;
         }
     }
-
+    public void startRestaurantProfile(){
+        Intent intent = new Intent(this, RestaurantActivity.class);
+        startActivity(intent);
+    }
     //set onItemClick for ListView.
     private void ClickCallback(){
         final ListView list = (ListView)findViewById(R.id.list);
